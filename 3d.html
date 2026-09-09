@@ -1,0 +1,3284 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>HoloVision AI - 3D Learning Lab</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+
+            background:
+                radial-gradient(
+                    circle at 50% 45%,
+                    #071a32 0%,
+                    #020711 48%,
+                    #01040a 100%
+                );
+
+            color: #eaf6ff;
+
+            min-height: 100vh;
+
+            overflow: hidden;
+        }
+
+        /* Main Page */
+
+        .page {
+            width: 100%;
+            height: 100vh;
+
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Common Panel */
+
+        .panel {
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(9, 25, 44, 0.94),
+                    rgba(2, 10, 20, 0.94)
+                );
+
+            border: 1px solid #1c3553;
+
+            border-radius: 15px;
+
+            box-shadow:
+                inset 0 0 25px rgba(0, 125, 255, 0.04),
+                0 0 15px rgba(0, 0, 0, 0.25);
+        }
+
+        /* Scrollbar */
+
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #020711;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #14527d;
+            border-radius: 10px;
+        }
+
+        /* Laptop Screen */
+
+        @media (max-width: 1000px) {
+
+            body {
+                overflow: auto;
+            }
+
+            .page {
+                min-height: 100vh;
+                height: auto;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="page">
+    <!-- ================= HEADER ================= -->
+
+<header class="header">
+
+    <!-- Logo -->
+    <div class="logo-box">
+        <span>✦</span>
+    </div>
+
+
+    <!-- HoloVision AI Title -->
+    <div class="logo-text">
+
+        <h1>HoloVision AI</h1>
+
+        <p>3D Learning Lab</p>
+
+    </div>
+
+
+    <!-- Search -->
+    <div class="search-box">
+
+        <input
+            type="text"
+            id="globalSearch"
+            placeholder="Search any topic..."
+        >
+
+        <span class="search-icon">⌕</span>
+
+    </div>
+
+
+    <!-- Profile -->
+    <div class="profile">
+
+        <div class="profile-icon">
+            ●
+        </div>
+
+        <div class="profile-name">
+            Tharu
+        </div>
+
+        <div class="profile-arrow">
+           ⌄
+        </div>
+
+    </div>
+
+
+    <!-- Sound -->
+    <div class="sound">
+        🔊
+    </div>
+
+</header>
+
+
+<style>
+
+    /* ================= HEADER ================= */
+
+    .header {
+
+        width: 100%;
+        height: 92px;
+
+        display: flex;
+        align-items: center;
+
+        gap: 18px;
+
+        padding: 12px 22px;
+
+        flex-shrink: 0;
+    }
+
+
+    /* Logo Box */
+
+    .logo-box {
+
+        width: 62px;
+        height: 62px;
+
+        border: 1px solid #1c5b91;
+
+        border-radius: 15px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        background: rgba(4, 17, 32, 0.7);
+
+        box-shadow:
+            0 0 18px rgba(0, 174, 255, 0.18);
+    }
+
+
+    .logo-box span {
+
+        font-size: 34px;
+
+        color: #19cfff;
+
+        text-shadow:
+            0 0 12px #00bfff;
+    }
+
+
+    /* Logo Text */
+
+    .logo-text h1 {
+
+        font-size: 27px;
+
+        font-weight: 700;
+
+        letter-spacing: -0.5px;
+    }
+
+
+    .logo-text p {
+
+        color: #73bfff;
+
+        font-size: 15px;
+
+        margin-top: 4px;
+    }
+
+
+    /* Search Box */
+
+    .search-box {
+
+        flex: 1;
+
+        height: 50px;
+
+        max-width: 700px;
+
+        margin-left: 35px;
+
+        border: 1px solid #21466e;
+
+        border-radius: 13px;
+
+        background:
+            rgba(4, 13, 26, 0.75);
+
+        display: flex;
+
+        align-items: center;
+
+        padding: 0 17px;
+
+        box-shadow:
+            inset 0 0 12px rgba(0, 140, 255, 0.03);
+    }
+
+
+    .search-box input {
+
+        flex: 1;
+
+        height: 100%;
+
+        background: transparent;
+
+        border: none;
+
+        outline: none;
+
+        color: white;
+
+        font-size: 16px;
+    }
+
+
+    .search-box input::placeholder {
+
+        color: #8f9fb2;
+    }
+
+
+    .search-icon {
+
+        font-size: 26px;
+
+        color: #aebed0;
+    }
+
+
+    /* Profile */
+
+    .profile {
+
+        width: 145px;
+
+        height: 50px;
+
+        border: 1px solid #21466e;
+
+        border-radius: 13px;
+
+        display: flex;
+
+        align-items: center;
+
+        gap: 10px;
+
+        padding: 7px 12px;
+
+        background:
+            rgba(4, 13, 26, 0.6);
+    }
+
+
+    .profile-icon {
+
+        width: 30px;
+        height: 30px;
+
+        border-radius: 50%;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        color: #4d9cff;
+
+        font-size: 20px;
+    }
+
+
+    .profile-name {
+
+        font-size: 15px;
+
+        color: #eaf4ff;
+    }
+
+
+    .profile-arrow {
+
+        margin-left: auto;
+
+        color: #9ca9ba;
+
+        font-size: 18px;
+    }
+
+
+    /* Sound */
+
+    .sound {
+
+        font-size: 24px;
+
+        color: #a9b4c4;
+
+        padding-left: 5px;
+    }
+
+
+    /* Header Responsive */
+
+    @media (max-width: 1000px) {
+
+        .header {
+
+            flex-wrap: wrap;
+
+            height: auto;
+
+            padding-bottom: 15px;
+        }
+
+        .search-box {
+
+            order: 5;
+
+            width: 100%;
+
+            max-width: none;
+
+            margin-left: 0;
+        }
+
+    }
+
+</style>
+
+<!-- ================= LEFT TOPICS PANEL ================= -->
+
+<section class="panel topics-panel">
+
+    <div class="section-title">
+        TOPICS
+    </div>
+
+
+    <!-- ================= SCIENCE ================= -->
+
+    <div class="topic-category">
+        SCIENCE
+    </div>
+
+
+    <button class="topic-btn active"
+            data-topic="human heart">
+
+        <span>Human Heart</span>
+
+    </button>
+
+
+    <button class="topic-btn"
+            data-topic="human eye">
+
+        <span>Human Eye</span>
+
+    </button>
+
+
+    <button class="topic-btn"
+            data-topic="human lungs">
+
+        <span>Human Lungs</span>
+
+    </button>
+
+
+    <button class="topic-btn"
+            data-topic="human kidney">
+
+        <span>Human Kidney</span>
+
+    </button>
+
+
+    <button class="topic-btn"
+            data-topic="human skeleton">
+
+        <span>Human Skeleton</span>
+
+    </button>
+
+
+    <button class="topic-btn"
+            data-topic="inner ear">
+
+        <span>Structure of Inner Ear</span>
+
+    </button>
+
+
+    <button class="topic-btn"
+            data-topic="dna double helix">
+
+        <span>DNA Double Helix</span>
+
+    </button>
+
+
+    <button class="topic-btn"
+            data-topic="atomic orbitals">
+
+        <span>3D Atomic Orbitals</span>
+
+    </button>
+
+
+    <button class="topic-btn"
+            data-topic="crystal lattice">
+
+
+        <span>Crystal Lattice Structures</span>
+
+    </button>
+
+
+    <button class="topic-btn"
+            data-topic="neuron synapse">
+
+        <span>Neuron Synapse</span>
+
+    </button>
+
+
+    <!-- ================= SOCIAL ================= -->
+
+    <div class="topic-category">
+        SOCIAL
+    </div>
+
+
+    <button class="topic-btn"
+            data-topic="internal layers of the earth">
+
+        <span class="topic-icon">🌍</span>
+
+        <span>Internal Layers of Earth</span>
+
+    </button>
+
+
+    <button class="topic-btn"
+            data-topic="tectonic plate boundaries">
+
+        <span class="topic-icon">🌎</span>
+
+        <span>Tectonic Plate Boundaries</span>
+
+    </button>
+
+
+    <button class="topic-btn"
+            data-topic="volcanic plumbing systems">
+
+        <span class="topic-icon">🌋</span>
+
+        <span>Volcanic Plumbing Systems</span>
+
+    </button>
+
+
+    <button class="topic-btn"
+            data-topic="oceanic crust subduction">
+
+        <span class="topic-icon">🌊</span>
+
+        <span>Oceanic Crust Subduction</span>
+
+    </button>
+
+
+    <button class="topic-btn"
+            data-topic="river landforms">
+
+        <span class="topic-icon">🏞️</span>
+
+        <span>Formation of River Landforms</span>
+
+    </button>
+
+
+    <button class="topic-btn"
+            data-topic="planetary orbital inclinations">
+
+        <span class="topic-icon">🪐</span>
+
+        <span>Planetary Orbital Inclinations</span>
+
+    </button>
+
+
+    <button class="topic-btn"
+            data-topic="gravitational pull">
+
+        <span class="topic-icon">🌌</span>
+
+        <span>Gravitational Pull & Spacetime</span>
+
+    </button>
+
+
+    <button class="topic-btn"
+            data-topic="milky way galaxy">
+
+        <span class="topic-icon">🌠</span>
+
+        <span>Milky Way Galaxy</span>
+
+    </button>
+
+
+    <button class="topic-btn"
+            data-topic="ancient monument structure">
+
+        <span class="topic-icon">🏛️</span>
+
+        <span>Ancient Monument Structure</span>
+
+    </button>
+
+
+    <button class="topic-btn"
+            data-topic="archaeological stratigraphy">
+
+        <span class="topic-icon">🏺</span>
+
+        <span>Archaeological Stratigraphy</span>
+
+    </button>
+
+
+    <!-- ================= MATHS ================= -->
+
+    <div class="topic-category">
+        MATHS
+    </div>
+
+
+    <button class="topic-btn"
+            data-topic="hypercubes">
+
+        <span class="topic-icon">◈</span>
+
+        <span>Hypercubes (4D Tesseracts)</span>
+
+    </button>
+
+
+    <button class="topic-btn"
+            data-topic="non orientable surfaces">
+
+        <span class="topic-icon">∞</span>
+
+        <span>Non-Orientable Surfaces</span>
+
+    </button>
+
+
+    <button class="topic-btn"
+            data-topic="partial derivatives">
+
+        <span class="topic-icon">∂</span>
+
+        <span>Partial Derivatives & Gradients</span>
+
+    </button>
+
+
+    <button class="topic-btn"
+            data-topic="quadric surfaces">
+
+        <span class="topic-icon">◇</span>
+
+        <span>Quadric Surfaces</span>
+
+    </button>
+
+
+    <button class="topic-btn"
+            data-topic="solids of revolution">
+
+        <span class="topic-icon">◉</span>
+
+        <span>Solids of Revolution</span>
+
+    </button>
+
+
+    <button class="topic-btn"
+            data-topic="spherical cylindrical coordinates">
+
+        <span class="topic-icon">◎</span>
+
+        <span>Spherical & Cylindrical Coordinates</span>
+
+    </button>
+
+
+    <button class="topic-btn"
+            data-topic="vector cross products">
+
+        <span class="topic-icon">↗</span>
+
+        <span>Vector Cross Products in 3D</span>
+
+    </button>
+
+
+    <button class="topic-btn"
+            data-topic="3d coordinate space">
+
+        <span class="topic-icon">📐</span>
+
+        <span>3D Coordinate Space (X,Y,Z)</span>
+
+    </button>
+
+
+    <button class="topic-btn"
+            data-topic="intersecting 3d planes">
+
+        <span class="topic-icon">✕</span>
+
+        <span>Intersecting 3D Planes</span>
+
+    </button>
+
+
+    <button class="topic-btn"
+            data-topic="complex polyhedrons">
+
+        <span class="topic-icon">⬡</span>
+
+        <span>Net Folds of Polyhedrons</span>
+
+    </button>
+
+
+    <!-- ================= MORE TOPICS ================= -->
+
+    <button class="more-topics"
+            id="moreTopics">
+
+        ▦ &nbsp; Explore More Topics
+
+    </button>
+
+
+</section>
+
+
+<style>
+
+/* ================= TOPICS PANEL ================= */
+
+.topics-panel {
+
+    width: 100%;
+
+    padding: 18px 12px;
+
+    overflow-y: auto;
+
+    overflow-x: hidden;
+}
+
+
+/* Section Title */
+
+.section-title {
+
+    color: #18baff;
+
+    font-size: 18px;
+
+    font-weight: 700;
+
+    padding: 0 12px 12px;
+
+    letter-spacing: .5px;
+}
+
+
+/* Category */
+
+.topic-category {
+
+    color: #6caeff;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    padding: 9px 12px 6px;
+
+    letter-spacing: 1px;
+}
+
+
+/* Topic Button */
+
+.topic-btn {
+
+    width: 100%;
+
+    min-height: 54px;
+
+    margin-bottom: 7px;
+
+    border: 1px solid #203a59;
+
+    border-radius: 11px;
+
+    background:
+        rgba(4, 14, 27, 0.72);
+
+    color: #edf5ff;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 11px;
+
+    padding: 8px 11px;
+
+    cursor: pointer;
+
+    transition: .2s;
+
+    text-align: left;
+
+    font-size: 13px;
+}
+
+
+/* Hover */
+
+.topic-btn:hover {
+
+    border-color: #1abfff;
+
+    background:
+        rgba(0, 127, 200, 0.12);
+
+    box-shadow:
+        0 0 10px rgba(0, 190, 255, .12);
+}
+
+
+/* Active */
+
+.topic-btn.active {
+
+    border-color: #14bfff;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(0, 141, 255, 0.20),
+            rgba(0, 71, 130, 0.10)
+        );
+
+    box-shadow:
+        0 0 13px rgba(0, 194, 255, 0.25);
+}
+
+
+/* Icon */
+
+.topic-icon {
+
+    width: 34px;
+
+    min-width: 34px;
+
+    text-align: center;
+
+    font-size: 22px;
+}
+
+
+/* More Topics */
+
+.more-topics {
+
+    width: 100%;
+
+    min-height: 46px;
+
+    border: 1px solid #1878bb;
+
+    border-radius: 10px;
+
+    color: #36bfff;
+
+    background:
+        rgba(0, 103, 181, .10);
+
+    font-size: 14px;
+
+    cursor: pointer;
+
+    margin-top: 5px;
+}
+
+
+.more-topics:hover {
+
+    background:
+        rgba(0, 145, 230, .18);
+
+    box-shadow:
+        0 0 12px rgba(0, 170, 255, .18);
+}
+
+</style>
+
+<!-- ================= CENTER 3D VIEWER ================= -->
+
+<section class="panel viewer-panel">
+
+    <!-- Topic Title -->
+
+    <div class="viewer-header">
+
+        <h2 id="modelTitle">
+            Human Heart
+        </h2>
+
+        <p id="modelSubtitle">
+            Explore the human heart through an
+            interactive 3D visualization.
+        </p>
+
+    </div>
+
+
+    <!-- ================= 3D CONTROLS ================= -->
+
+    <div class="viewer-controls">
+
+        <button class="viewer-control"
+                id="rotateBtn">
+
+            <span class="control-icon">⟳</span>
+
+            <span>Rotate</span>
+
+        </button>
+
+
+        <button class="viewer-control"
+                id="zoomBtn">
+
+            <span class="control-icon">⊕</span>
+
+            <span>Zoom</span>
+
+        </button>
+
+
+        <button class="viewer-control"
+                id="resetBtn">
+
+            <span class="control-icon">↻</span>
+
+            <span>Reset</span>
+
+        </button>
+
+
+        <button class="viewer-control xray-control"
+                id="xrayBtn">
+
+            <span class="control-icon">◇</span>
+
+            <span>X-Ray</span>
+
+        </button>
+
+    </div>
+
+
+    <!-- ================= THREE.JS VIEWER ================= -->
+
+    <div id="viewer">
+
+        <!-- 3D MODEL WILL LOAD HERE -->
+
+        <div class="viewer-placeholder">
+
+            <div class="hologram-ring"></div>
+
+            <div class="placeholder-icon">
+                3D
+            </div>
+
+            <p>
+                Loading 3D Model...
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= MODEL STATUS ================= -->
+
+    <div id="modelStatus"
+         class="model-status">
+
+        <div class="loader"></div>
+
+        <p>
+            Loading 3D model...
+        </p>
+
+    </div>
+
+
+    <!-- ================= UNAVAILABLE MESSAGE ================= -->
+
+    <div id="modelUnavailable"
+         class="model-unavailable">
+
+        <div class="unavailable-icon">
+            ⚠
+        </div>
+
+        <h3>
+            3D Model Currently Unavailable
+        </h3>
+
+        <p>
+            No suitable real 3D model is
+            available for this topic.
+        </p>
+
+    </div>
+
+
+    <!-- ================= MODEL THUMBNAILS ================= -->
+
+    <div class="model-thumbnails">
+
+        <button class="model-thumb active">
+            ❤️
+        </button>
+
+        <button class="model-thumb">
+            🫁
+        </button>
+
+        <button class="model-thumb">
+            🧠
+        </button>
+
+        <button class="model-thumb">
+            👁️
+        </button>
+
+    </div>
+
+
+    <!-- ================= TOPIC INPUT ================= -->
+
+    <div class="topic-input">
+
+        <input
+            type="text"
+            id="topicInput"
+            placeholder="Enter a topic to visualise..."
+        >
+
+        <button id="visualiseBtn">
+            VISUALISE
+        </button>
+
+        <button id="clearBtn">
+            CLEAR
+        </button>
+
+    </div>
+
+
+    <!-- ================= SPEECH ================= -->
+
+    <button
+        class="speech-button"
+        id="speechBtn">
+
+        🔊 SPEECH ON
+
+    </button>
+
+</section>
+
+
+<style>
+
+/* ================= VIEWER PANEL ================= */
+
+.viewer-panel {
+
+    position: relative;
+
+    overflow: hidden;
+
+    min-width: 0;
+
+    min-height: 520px;
+}
+
+
+/* ================= TITLE ================= */
+
+.viewer-header {
+
+    position: absolute;
+
+    left: 24px;
+
+    top: 18px;
+
+    z-index: 10;
+}
+
+
+.viewer-header h2 {
+
+    color: #19d8ff;
+
+    font-size: 23px;
+
+    margin-bottom: 7px;
+}
+
+
+.viewer-header p {
+
+    width: 300px;
+
+    color: #d9e5f0;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+}
+
+
+/* ================= CONTROLS ================= */
+
+.viewer-controls {
+
+    position: absolute;
+
+    top: 17px;
+
+    right: 16px;
+
+    z-index: 20;
+
+    display: flex;
+
+    gap: 8px;
+}
+
+
+.viewer-control {
+
+    min-width: 58px;
+
+    height: 64px;
+
+    border: none;
+
+    background: transparent;
+
+    color: #e6edf7;
+
+    cursor: pointer;
+
+    text-align: center;
+
+    border-radius: 9px;
+
+    padding: 5px;
+}
+
+
+.viewer-control:hover {
+
+    background:
+        rgba(0, 160, 255, .08);
+
+    color: #4bdcff;
+}
+
+
+.control-icon {
+
+    display: block;
+
+    font-size: 27px;
+
+    margin-bottom: 4px;
+}
+
+
+.viewer-control span:last-child {
+
+    font-size: 12px;
+}
+
+
+.xray-control {
+
+    border: 1px solid #13cfff;
+
+    background:
+        rgba(0, 176, 255, .08);
+
+}
+
+
+/* ================= THREE.JS VIEWER ================= */
+
+#viewer {
+
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+
+    height: 100%;
+
+    overflow: hidden;
+}
+
+
+#viewer canvas {
+
+    display: block;
+
+    width: 100% !important;
+
+    height: 100% !important;
+}
+
+
+/* ================= PLACEHOLDER ================= */
+
+.viewer-placeholder {
+
+    position: absolute;
+
+    left: 50%;
+
+    top: 53%;
+
+    transform:
+        translate(-50%, -50%);
+
+    text-align: center;
+
+    color: #48d8ff;
+
+    pointer-events: none;
+}
+
+
+.placeholder-icon {
+
+    width: 90px;
+
+    height: 90px;
+
+    margin: auto;
+
+    border: 2px solid #13cfff;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 22px;
+
+    box-shadow:
+        0 0 25px rgba(0, 198, 255, .25);
+
+    animation:
+        pulseViewer 2s infinite;
+}
+
+
+.viewer-placeholder p {
+
+    margin-top: 15px;
+
+    font-size: 14px;
+
+    color: #7bdcff;
+}
+
+
+@keyframes pulseViewer {
+
+    0% {
+        box-shadow:
+            0 0 10px rgba(0, 198, 255, .15);
+    }
+
+    50% {
+        box-shadow:
+            0 0 30px rgba(0, 198, 255, .40);
+    }
+
+    100% {
+        box-shadow:
+            0 0 10px rgba(0, 198, 255, .15);
+    }
+
+}
+
+
+/* ================= LOADING ================= */
+
+.model-status {
+
+    position: absolute;
+
+    left: 50%;
+
+    top: 52%;
+
+    transform:
+        translate(-50%, -50%);
+
+    z-index: 30;
+
+    text-align: center;
+
+    display: none;
+
+    pointer-events: none;
+}
+
+
+.loader {
+
+    width: 46px;
+
+    height: 46px;
+
+    margin: auto;
+
+    border: 3px solid #173c5b;
+
+    border-top-color: #19cfff;
+
+    border-radius: 50%;
+
+    animation:
+        spinModel 1s linear infinite;
+}
+
+
+@keyframes spinModel {
+
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
+
+.model-status p {
+
+    margin-top: 12px;
+
+    color: #7edcff;
+
+    font-size: 14px;
+}
+
+
+/* ================= UNAVAILABLE ================= */
+
+.model-unavailable {
+
+    position: absolute;
+
+    left: 50%;
+
+    top: 50%;
+
+    transform:
+        translate(-50%, -50%);
+
+    width: 310px;
+
+    padding: 22px;
+
+    text-align: center;
+
+    z-index: 35;
+
+    display: none;
+
+    border: 1px solid #31506b;
+
+    border-radius: 12px;
+
+    background:
+        rgba(3, 13, 25, .94);
+
+    box-shadow:
+        0 0 25px rgba(0, 0, 0, .35);
+}
+
+
+.unavailable-icon {
+
+    font-size: 32px;
+
+    margin-bottom: 8px;
+}
+
+
+.model-unavailable h3 {
+
+    color: #7edcff;
+
+    font-size: 16px;
+
+    margin-bottom: 8px;
+}
+
+
+.model-unavailable p {
+
+    color: #aebdcd;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+}
+
+
+/* ================= THUMBNAILS ================= */
+
+.model-thumbnails {
+
+    position: absolute;
+
+    bottom: 72px;
+
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+
+    z-index: 20;
+
+    display: flex;
+
+    gap: 10px;
+}
+
+
+.model-thumb {
+
+    width: 78px;
+
+    height: 58px;
+
+    border: 1px solid #294765;
+
+    border-radius: 9px;
+
+    background:
+        rgba(2, 11, 23, .92);
+
+    color: white;
+
+    font-size: 27px;
+
+    cursor: pointer;
+}
+
+
+.model-thumb:hover {
+
+    border-color: #16d8ff;
+}
+
+
+.model-thumb.active {
+
+    border-color: #16d8ff;
+
+    box-shadow:
+        0 0 12px
+        rgba(0, 200, 255, .28);
+}
+
+
+/* ================= TOPIC INPUT ================= */
+
+.topic-input {
+
+    position: absolute;
+
+    bottom: 17px;
+
+    left: 20px;
+
+    right: 20px;
+
+    z-index: 25;
+
+    display: flex;
+
+    gap: 7px;
+}
+
+
+.topic-input input {
+
+    flex: 1;
+
+    height: 40px;
+
+    background:
+        rgba(3, 12, 23, .92);
+
+    border: 1px solid #244663;
+
+    border-radius: 8px;
+
+    color: white;
+
+    padding: 0 12px;
+
+    outline: none;
+
+    font-size: 13px;
+}
+
+
+.topic-input input:focus {
+
+    border-color: #16cfff;
+
+    box-shadow:
+        0 0 8px
+        rgba(0, 190, 255, .12);
+}
+
+
+.topic-input button {
+
+    height: 40px;
+
+    padding: 0 13px;
+
+    border: 1px solid #16bfff;
+
+    border-radius: 8px;
+
+    background:
+        rgba(0, 147, 220, .14);
+
+    color: #5ed9ff;
+
+    cursor: pointer;
+
+    font-size: 12px;
+}
+
+
+.topic-input button:hover {
+
+    background:
+        rgba(0, 147, 220, .25);
+}
+
+
+/* ================= SPEECH ================= */
+
+.speech-button {
+
+    position: absolute;
+
+    right: 18px;
+
+    bottom: 18px;
+
+    z-index: 30;
+
+    border: 1px solid #276080;
+
+    border-radius: 8px;
+
+    background:
+        rgba(0, 115, 175, .12);
+
+    color: #74dfff;
+
+    padding: 8px 11px;
+
+    cursor: pointer;
+
+    font-size: 12px;
+}
+
+
+.speech-button:hover {
+
+    border-color: #19cfff;
+
+    background:
+        rgba(0, 170, 230, .18);
+}
+
+</style>
+
+<!-- ================= RIGHT INFORMATION PANEL ================= -->
+
+<section class="panel right-panel">
+
+    <!-- ================= MODES ================= -->
+
+    <div class="modes">
+
+        <button class="mode-btn active">
+            EXPLORE
+        </button>
+
+        <button class="mode-btn">
+            EXPERIMENT
+        </button>
+
+        <button class="mode-btn">
+            CHALLENGE
+        </button>
+
+    </div>
+
+
+    <!-- ================= ABOUT TOPIC ================= -->
+
+    <div class="info-box">
+
+        <h3 id="aboutTitle">
+            About Human Heart
+        </h3>
+
+        <p id="aboutText">
+
+            The human heart is a muscular organ
+            that pumps blood throughout the body.
+            It has four chambers and works
+            continuously to maintain blood circulation.
+
+        </p>
+
+    </div>
+
+
+    <!-- ================= PARTS ================= -->
+
+    <div class="info-box">
+
+        <div class="parts-title">
+            Parts
+        </div>
+
+
+        <div id="partsList">
+
+            <div class="part-row">
+
+                <span>🫀</span>
+
+                <span>Aorta</span>
+
+                <span class="part-eye">
+                    ◉
+                </span>
+
+            </div>
+
+
+            <div class="part-row">
+
+                <span>🫁</span>
+
+                <span>Pulmonary Artery</span>
+
+                <span class="part-eye">
+                    ◉
+                </span>
+
+            </div>
+
+
+            <div class="part-row">
+
+                <span>🫀</span>
+
+                <span>Right Atrium</span>
+
+                <span class="part-eye">
+                    ◉
+                </span>
+
+            </div>
+
+
+            <div class="part-row">
+
+                <span>🫀</span>
+
+                <span>Left Atrium</span>
+
+                <span class="part-eye">
+                    ◉
+                </span>
+
+            </div>
+
+
+            <div class="part-row">
+
+                <span>🫀</span>
+
+                <span>Right Ventricle</span>
+
+                <span class="part-eye">
+                    ◉
+                </span>
+
+            </div>
+
+
+            <div class="part-row">
+
+                <span>🫀</span>
+
+                <span>Left Ventricle</span>
+
+                <span class="part-eye">
+                    ◉
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= VIEW MODE ================= -->
+
+    <div class="info-box">
+
+        <h3>
+            View Mode
+        </h3>
+
+
+        <div class="view-mode-buttons">
+
+            <button class="view-btn active">
+                Normal
+            </button>
+
+            <button class="view-btn">
+                X-Ray
+            </button>
+
+            <button class="view-btn">
+                Transparent
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<style>
+
+/* ================= RIGHT PANEL ================= */
+
+.right-panel {
+
+    padding: 13px;
+
+    overflow-y: auto;
+
+    overflow-x: hidden;
+}
+
+
+/* ================= MODES ================= */
+
+.modes {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr 1fr;
+
+    gap: 7px;
+}
+
+
+.mode-btn {
+
+    height: 47px;
+
+    border: 1px solid #253c56;
+
+    background:
+        rgba(3, 12, 24, .72);
+
+    color: #d5deeb;
+
+    border-radius: 9px;
+
+    font-size: 13px;
+
+    cursor: pointer;
+
+    transition: .2s;
+}
+
+
+.mode-btn:hover {
+
+    border-color: #238ee8;
+
+    color: white;
+}
+
+
+.mode-btn.active {
+
+    color: white;
+
+    border-color: #168cff;
+
+    background:
+        linear-gradient(
+            135deg,
+            #167de3,
+            #0757a6
+        );
+
+    box-shadow:
+        0 0 13px
+        rgba(0, 132, 255, .28);
+}
+
+
+/* ================= INFO BOX ================= */
+
+.info-box {
+
+    border: 1px solid #1d3855;
+
+    border-radius: 11px;
+
+    padding: 15px;
+
+    margin-top: 13px;
+
+    background:
+        rgba(2, 12, 24, .38);
+}
+
+
+.info-box h3 {
+
+    color: #26bfff;
+
+    font-size: 17px;
+
+    margin-bottom: 10px;
+}
+
+
+.info-box p {
+
+    color: #d5dfeb;
+
+    font-size: 13px;
+
+    line-height: 1.55;
+}
+
+
+/* ================= PARTS ================= */
+
+.parts-title {
+
+    color: #e8f1f9;
+
+    font-size: 16px;
+
+    margin-bottom: 6px;
+}
+
+
+.part-row {
+
+    min-height: 42px;
+
+    border-top: 1px solid #1d334b;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    color: #e9f1f8;
+
+    font-size: 13px;
+}
+
+
+.part-row:first-child {
+
+    border-top: none;
+}
+
+
+.part-eye {
+
+    margin-left: auto;
+
+    color: #e3edf7;
+
+    font-size: 17px;
+
+    cursor: pointer;
+}
+
+
+.part-eye:hover {
+
+    color: #25cfff;
+
+}
+
+
+/* ================= VIEW MODE ================= */
+
+.view-mode-buttons {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr 1fr;
+
+    gap: 7px;
+}
+
+
+.view-btn {
+
+    height: 42px;
+
+    border: 1px solid #253c56;
+
+    background:
+        rgba(3, 12, 24, .75);
+
+    color: #d5deeb;
+
+    border-radius: 8px;
+
+    font-size: 12px;
+
+    cursor: pointer;
+
+    transition: .2s;
+}
+
+
+.view-btn:hover {
+
+    border-color: #20bfff;
+
+    color: white;
+}
+
+
+.view-btn.active {
+
+    border-color: #168cff;
+
+    background:
+        rgba(0, 113, 213, .25);
+
+    color: white;
+
+    box-shadow:
+        0 0 10px
+        rgba(0, 132, 255, .18);
+}
+
+
+/* ================= RIGHT PANEL SCROLLBAR ================= */
+
+.right-panel::-webkit-scrollbar {
+
+    width: 5px;
+}
+
+
+.right-panel::-webkit-scrollbar-track {
+
+    background: transparent;
+}
+
+
+.right-panel::-webkit-scrollbar-thumb {
+
+    background: #16486c;
+
+    border-radius: 10px;
+}
+
+</style>
+
+<!-- ================= BOTTOM INTERACT PANEL ================= -->
+
+<section class="panel interact-panel">
+
+    <h3>INTERACT</h3>
+
+    <div class="interact-row">
+        <span>↻</span>
+        <span>Drag to Rotate</span>
+    </div>
+
+    <div class="interact-row">
+        <span>⊕</span>
+        <span>Scroll to Zoom</span>
+    </div>
+
+    <div class="interact-row">
+        <span>◎</span>
+        <span>Click on parts to know more</span>
+    </div>
+
+</section>
+
+
+<!-- ================= EXPERIMENT PANEL ================= -->
+
+<section class="panel experiment-panel">
+
+    <h3>EXPERIMENT</h3>
+
+
+    <div class="slider-row">
+
+        <label>
+            Heart Rate
+        </label>
+
+        <input
+            type="range"
+            id="heartRate"
+            min="40"
+            max="150"
+            value="75"
+        >
+
+        <span
+            class="value"
+            id="heartRateValue">
+            75 bpm
+        </span>
+
+    </div>
+
+
+    <div class="slider-row">
+
+        <label>
+            Blood Flow Speed
+        </label>
+
+        <input
+            type="range"
+            id="bloodFlow"
+            min="0.5"
+            max="2"
+            step="0.1"
+            value="1"
+        >
+
+        <span
+            class="value"
+            id="bloodFlowValue">
+            1.0×
+        </span>
+
+
+        <button
+            class="experiment-play"
+            id="experimentPlay">
+
+            ▶
+
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ================= CHALLENGE PANEL ================= -->
+
+<section class="panel challenge-panel">
+
+    <h3>CHALLENGE</h3>
+
+
+    <div class="challenge-question">
+
+        Which chamber pumps oxygenated
+        blood to the body?
+
+    </div>
+
+
+    <div class="answer-grid">
+
+        <button class="answer-btn">
+            Right Atrium
+        </button>
+
+        <button class="answer-btn">
+            Left Atrium
+        </button>
+
+        <button
+            class="answer-btn"
+            data-correct="true">
+
+            Left Ventricle
+
+        </button>
+
+        <button class="answer-btn">
+            Right Ventricle
+        </button>
+
+    </div>
+
+
+    <div class="challenge-score">
+
+        <span>
+            Score: <b id="score">10</b>
+        </span>
+
+        <span>
+            Streak: <b id="streak">2</b>
+        </span>
+
+    </div>
+
+</section>
+
+
+<!-- ================= AI ASSISTANT ================= -->
+
+<section class="panel ai-panel">
+
+    <h3>AI ASSISTANT</h3>
+
+
+    <div class="ai-intro">
+
+        Ask me anything about this topic...
+
+    </div>
+
+
+    <div class="ai-input">
+
+        <input
+            type="text"
+            id="aiQuestion"
+            placeholder="Type your question..."
+        >
+
+
+        <button id="aiSend">
+
+            ➤
+
+        </button>
+
+    </div>
+
+</section>
+
+
+<style>
+
+/* ================= BOTTOM PANELS ================= */
+
+.interact-panel,
+.experiment-panel,
+.challenge-panel,
+.ai-panel {
+
+    min-width: 0;
+
+    overflow: hidden;
+}
+
+
+/* ================= INTERACT ================= */
+
+.interact-panel {
+
+    padding: 16px 22px;
+}
+
+
+.interact-panel h3 {
+
+    color: #1abaff;
+
+    font-size: 18px;
+
+    margin-bottom: 11px;
+}
+
+
+.interact-row {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 11px;
+
+    margin: 9px 0;
+
+    color: #d8e2ee;
+
+    font-size: 13px;
+}
+
+
+.interact-row span:first-child {
+
+    width: 22px;
+
+    color: #42bfff;
+
+    font-size: 21px;
+
+    text-align: center;
+}
+
+
+/* ================= EXPERIMENT ================= */
+
+.experiment-panel {
+
+    padding: 16px 18px;
+}
+
+
+.experiment-panel h3 {
+
+    color: #1abaff;
+
+    font-size: 18px;
+
+    margin-bottom: 8px;
+}
+
+
+.slider-row {
+
+    min-height: 52px;
+
+    border-top: 1px solid #17304a;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+}
+
+
+.slider-row label {
+
+    width: 112px;
+
+    color: #e2ebf4;
+
+    font-size: 13px;
+}
+
+
+.slider-row input {
+
+    flex: 1;
+
+    min-width: 60px;
+
+    accent-color: #218ee7;
+
+    cursor: pointer;
+}
+
+
+.value {
+
+    width: 55px;
+
+    text-align: right;
+
+    color: #d8e2ed;
+
+    font-size: 12px;
+}
+
+
+.experiment-play {
+
+    width: 37px;
+
+    height: 34px;
+
+    border: 1px solid #245a81;
+
+    border-radius: 7px;
+
+    background: #07182b;
+
+    color: #54cfff;
+
+    cursor: pointer;
+
+    font-size: 15px;
+}
+
+
+.experiment-play:hover {
+
+    border-color: #1acfff;
+
+    background: #0a2943;
+}
+
+
+/* ================= CHALLENGE ================= */
+
+.challenge-panel {
+
+    padding: 16px 18px;
+}
+
+
+.challenge-panel h3 {
+
+    color: #bc72ff;
+
+    font-size: 18px;
+
+    margin-bottom: 9px;
+}
+
+
+.challenge-question {
+
+    color: #e8eef5;
+
+    font-size: 13px;
+
+    line-height: 1.4;
+
+    margin-bottom: 8px;
+}
+
+
+.answer-grid {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 6px;
+}
+
+
+.answer-btn {
+
+    border: 1px solid #24425e;
+
+    background:
+        rgba(3, 13, 25, .8);
+
+    color: #dbe6f1;
+
+    border-radius: 8px;
+
+    padding: 7px 9px;
+
+    cursor: pointer;
+
+    font-size: 11px;
+}
+
+
+.answer-btn:hover {
+
+    border-color: #7b5cff;
+
+}
+
+
+.answer-btn[data-correct="true"] {
+
+    border-color: #28d69b;
+
+    color: #43e7ad;
+}
+
+
+.challenge-score {
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 18px;
+
+    margin-top: 10px;
+
+    color: #9fb0c3;
+
+    font-size: 12px;
+}
+
+
+.challenge-score b {
+
+    color: #43e7ad;
+}
+
+
+/* ================= AI ASSISTANT ================= */
+
+.ai-panel {
+
+    padding: 16px;
+}
+
+
+.ai-panel h3 {
+
+    color: #b66fff;
+
+    font-size: 18px;
+
+    margin-bottom: 11px;
+}
+
+
+.ai-intro {
+
+    border: 1px solid #1c334c;
+
+    border-radius: 9px;
+
+    padding: 11px;
+
+    color: #d4deea;
+
+    font-size: 12px;
+
+    margin-bottom: 9px;
+}
+
+
+.ai-input {
+
+    height: 46px;
+
+    border: 1px solid #203c59;
+
+    border-radius: 9px;
+
+    display: flex;
+
+    align-items: center;
+
+    overflow: hidden;
+
+    background:
+        rgba(2, 10, 20, .5);
+}
+
+
+.ai-input:focus-within {
+
+    border-color: #8d5cff;
+
+}
+
+
+.ai-input input {
+
+    flex: 1;
+
+    height: 100%;
+
+    min-width: 0;
+
+    background: transparent;
+
+    border: none;
+
+    outline: none;
+
+    color: white;
+
+    padding: 0 11px;
+
+    font-size: 12px;
+}
+
+
+.ai-input input::placeholder {
+
+    color: #7e8fa2;
+}
+
+
+.ai-input button {
+
+    width: 48px;
+
+    height: 100%;
+
+    border: none;
+
+    background: #0873ce;
+
+    color: white;
+
+    font-size: 19px;
+
+    cursor: pointer;
+}
+
+
+.ai-input button:hover {
+
+    background: #0b8bea;
+
+}
+
+</style>
+
+<style>
+
+.main {
+
+    grid-template-areas:
+
+        "topics viewer right"
+
+        "topics bottom bottom";
+}
+
+
+/* Assign areas */
+
+.topics-panel {
+
+    grid-area: topics;
+}
+
+
+.viewer-panel {
+
+    grid-area: viewer;
+}
+
+
+.right-panel {
+
+    grid-area: right;
+}
+
+
+/* Bottom 4 cards */
+
+.interact-panel {
+
+    grid-area: bottom;
+
+}
+
+
+</style>
+
+    </div>
+
+<!-- PART 7 SCRIPTS -->
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+
+<script src="3d-page.js"></script>
+
+<!-- ================= PART 8 : FINAL UI CONTROL ================= -->
+
+<script>
+
+/* =========================================
+   HOLOVISION AI - 3D LEARNING LAB
+   PART 8
+   ========================================= */
+
+
+/* ---------- ELEMENTS ---------- */
+
+const topicButtons =
+    document.querySelectorAll(".topic-btn");
+
+const topicInput =
+    document.getElementById("topicInput");
+
+const globalSearch =
+    document.getElementById("globalSearch");
+
+const visualiseBtn =
+    document.getElementById("visualiseBtn");
+
+const clearBtn =
+    document.getElementById("clearBtn");
+
+const rotateBtn =
+    document.getElementById("rotateBtn");
+
+const zoomBtn =
+    document.getElementById("zoomBtn");
+
+const resetBtn =
+    document.getElementById("resetBtn");
+
+const xrayBtn =
+    document.getElementById("xrayBtn");
+
+const speechBtn =
+    document.getElementById("speechBtn");
+
+
+/* =========================================
+   EMPTY DEFAULT VIEW
+   ========================================= */
+
+window.addEventListener("load", function() {
+
+    /*
+       Page open ஆகும்போது
+       Human Heart automatic-ஆ load ஆகக்கூடாது.
+    */
+
+    if (typeof clear3DVisualisation === "function") {
+
+        clear3DVisualisation();
+
+    }
+
+    if (topicInput) {
+
+        topicInput.value = "";
+
+        topicInput.placeholder =
+            "Select a topic or enter a topic...";
+
+    }
+
+    topicButtons.forEach(function(button) {
+
+        button.classList.remove("active");
+
+    });
+
+});
+
+
+/* =========================================
+   TOPIC SELECTION
+   ========================================= */
+
+topicButtons.forEach(function(button) {
+
+    button.addEventListener("click", function() {
+
+        /* Remove previous selection */
+
+        topicButtons.forEach(function(btn) {
+
+            btn.classList.remove("active");
+
+        });
+
+
+        /* Highlight selected topic */
+
+        this.classList.add("active");
+
+
+        /* Get topic */
+
+        const selectedTopic =
+            this.getAttribute("data-topic");
+
+
+        /* Put topic in input */
+
+        if (topicInput) {
+
+            topicInput.value =
+                selectedTopic;
+
+        }
+
+
+        /* Load selected topic */
+
+        if (typeof loadTopic === "function") {
+
+            loadTopic();
+
+        }
+
+    });
+
+});
+
+
+/* =========================================
+   GLOBAL SEARCH
+   ========================================= */
+
+if (globalSearch) {
+
+    globalSearch.addEventListener(
+        "keydown",
+        function(event) {
+
+            if (event.key !== "Enter") return;
+
+            const searchTopic =
+                globalSearch.value.trim();
+
+            if (!searchTopic) return;
+
+
+            if (topicInput) {
+
+                topicInput.value =
+                    searchTopic;
+
+            }
+
+
+            /* Remove old active selection */
+
+            topicButtons.forEach(function(button) {
+
+                button.classList.remove("active");
+
+            });
+
+
+            /* Load topic */
+
+            if (typeof loadTopic === "function") {
+
+                loadTopic();
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =========================================
+   VISUALISE BUTTON
+   ========================================= */
+
+if (visualiseBtn) {
+
+    visualiseBtn.addEventListener(
+        "click",
+        function() {
+
+            if (!topicInput ||
+                !topicInput.value.trim()) {
+
+                alert(
+                    "Please select or enter a topic."
+                );
+
+                return;
+
+            }
+
+
+            if (typeof loadTopic === "function") {
+
+                loadTopic();
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =========================================
+   CLEAR
+   ========================================= */
+
+if (clearBtn) {
+
+    clearBtn.addEventListener(
+        "click",
+        function() {
+
+            if (
+                typeof clear3DVisualisation ===
+                "function"
+            ) {
+
+                clear3DVisualisation();
+
+            }
+
+
+            if (topicInput) {
+
+                topicInput.value = "";
+
+            }
+
+
+            topicButtons.forEach(
+                function(button) {
+
+                    button.classList.remove(
+                        "active"
+                    );
+
+                }
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================
+   ROTATE
+   ========================================= */
+
+if (rotateBtn) {
+
+    rotateBtn.addEventListener(
+        "click",
+        function() {
+
+            if (
+                typeof controls !==
+                "undefined" &&
+                controls
+            ) {
+
+                controls.autoRotate =
+                    !controls.autoRotate;
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =========================================
+   ZOOM
+   ========================================= */
+
+if (zoomBtn) {
+
+    zoomBtn.addEventListener(
+        "click",
+        function() {
+
+            if (
+                typeof camera !==
+                "undefined" &&
+                camera
+            ) {
+
+                camera.position.z = 7;
+
+                if (
+                    typeof controls !==
+                    "undefined" &&
+                    controls
+                ) {
+
+                    controls.update();
+
+                }
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =========================================
+   RESET
+   ========================================= */
+
+if (resetBtn) {
+
+    resetBtn.addEventListener(
+        "click",
+        function() {
+
+            if (
+                typeof controls !==
+                "undefined" &&
+                controls
+            ) {
+
+                controls.reset();
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =========================================
+   X-RAY
+   ========================================= */
+
+if (xrayBtn) {
+
+    xrayBtn.addEventListener(
+        "click",
+        function() {
+
+            if (
+                typeof currentModel !==
+                "undefined" &&
+                currentModel
+            ) {
+
+                currentModel.traverse(
+                    function(object) {
+
+                        if (object.isMesh) {
+
+                            object.material
+                                .transparent = true;
+
+                            object.material
+                                .opacity = 0.35;
+
+                        }
+
+                    }
+                );
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =========================================
+   SPEECH ON / OFF
+   ========================================= */
+
+if (speechBtn) {
+
+    speechBtn.addEventListener(
+        "click",
+        function() {
+
+            if (
+                typeof speechEnabled !==
+                "undefined"
+            ) {
+
+                speechEnabled =
+                    !speechEnabled;
+
+
+                if (speechEnabled) {
+
+                    speechBtn.innerHTML =
+                        "🔊 SPEECH ON";
+
+                } else {
+
+                    speechBtn.innerHTML =
+                        "🔇 SPEECH OFF";
+
+
+                    if (
+                        "speechSynthesis"
+                        in window
+                    ) {
+
+                        speechSynthesis.cancel();
+
+                    }
+
+                }
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =========================================
+   VIEW MODE
+   ========================================= */
+
+const viewButtons =
+    document.querySelectorAll(".view-btn");
+
+
+viewButtons.forEach(function(button) {
+
+    button.addEventListener(
+        "click",
+        function() {
+
+            viewButtons.forEach(
+                function(btn) {
+
+                    btn.classList.remove(
+                        "active"
+                    );
+
+                }
+            );
+
+
+            this.classList.add("active");
+
+
+            const mode =
+                this.textContent
+                    .trim()
+                    .toLowerCase();
+
+
+            if (
+                typeof currentModel !==
+                "undefined" &&
+                currentModel
+            ) {
+
+                currentModel.traverse(
+                    function(object) {
+
+                        if (!object.isMesh)
+                            return;
+
+
+                        if (mode === "x-ray") {
+
+                            object.material
+                                .transparent = true;
+
+                            object.material
+                                .opacity = 0.35;
+
+                        }
+
+                        else if (
+                            mode ===
+                            "transparent"
+                        ) {
+
+                            object.material
+                                .transparent = true;
+
+                            object.material
+                                .opacity = 0.55;
+
+                        }
+
+                        else {
+
+                            object.material
+                                .transparent = false;
+
+                            object.material
+                                .opacity = 1;
+
+                        }
+
+                    }
+                );
+
+            }
+
+        }
+    );
+
+});
+
+
+/* =========================================
+   HEART RATE
+   ========================================= */
+
+const heartRate =
+    document.getElementById("heartRate");
+
+const heartRateValue =
+    document.getElementById(
+        "heartRateValue"
+    );
+
+
+if (heartRate && heartRateValue) {
+
+    heartRate.addEventListener(
+        "input",
+        function() {
+
+            heartRateValue.textContent =
+                this.value + " bpm";
+
+        }
+    );
+
+}
+
+
+/* =========================================
+   BLOOD FLOW
+   ========================================= */
+
+const bloodFlow =
+    document.getElementById("bloodFlow");
+
+const bloodFlowValue =
+    document.getElementById(
+        "bloodFlowValue"
+    );
+
+
+if (bloodFlow && bloodFlowValue) {
+
+    bloodFlow.addEventListener(
+        "input",
+        function() {
+
+            bloodFlowValue.textContent =
+                Number(this.value)
+                    .toFixed(1) + "×";
+
+        }
+    );
+
+}
+
+
+/* =========================================
+   CHALLENGE
+   ========================================= */
+
+const answerButtons =
+    document.querySelectorAll(
+        ".answer-btn"
+    );
+
+
+answerButtons.forEach(function(button) {
+
+    button.addEventListener(
+        "click",
+        function() {
+
+            if (
+                this.dataset.correct ===
+                "true"
+            ) {
+
+                this.textContent =
+                    "✓ Correct!";
+
+            } else {
+
+                this.textContent =
+                    "Try Again";
+
+            }
+
+        }
+    );
+
+});
+
+
+/* =========================================
+   MORE TOPICS
+   ========================================= */
+
+const moreTopics =
+    document.getElementById(
+        "moreTopics"
+    );
+
+
+if (moreTopics) {
+
+    moreTopics.addEventListener(
+        "click",
+        function() {
+
+            const panel =
+                document.querySelector(
+                    ".topics-panel"
+                );
+
+
+            if (panel) {
+
+                panel.scrollTo({
+
+                    top:
+                        panel.scrollHeight,
+
+                    behavior:
+                        "smooth"
+
+                });
+
+            }
+
+        }
+    );
+
+}
+
+</script>
+
+<!-- ================= END PART 8 ================= -->
+
+</body>
+
+</html>

@@ -1,0 +1,1225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>HoloVision AI - Chat</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+
+<style>
+
+/* ========================================
+   HOLOVISION AI CHAT
+   PART 1 - MAIN DESIGN
+   ======================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html,
+body{
+    width:100%;
+    min-height:100%;
+}
+
+body{
+
+    font-family:'Poppins',sans-serif;
+
+    color:#ffffff;
+
+    background:
+    radial-gradient(
+        circle at 50% 20%,
+        rgba(0,220,255,.08),
+        transparent 30%
+    ),
+    radial-gradient(
+        circle at 80% 70%,
+        rgba(150,60,255,.08),
+        transparent 35%
+    ),
+    #020611;
+
+    overflow-x:hidden;
+}
+
+
+/* ========================================
+   BACKGROUND
+   ======================================== */
+
+.page{
+
+    min-height:100vh;
+
+    position:relative;
+
+    overflow:hidden;
+
+    padding-bottom:40px;
+}
+
+
+.page::before{
+
+    content:"";
+
+    position:fixed;
+
+    inset:0;
+
+    pointer-events:none;
+
+    background:
+
+    radial-gradient(
+        circle at 12% 25%,
+        #00eaff 0,
+        transparent 2px
+    ),
+
+    radial-gradient(
+        circle at 86% 20%,
+        #9b5cff 0,
+        transparent 2px
+    ),
+
+    radial-gradient(
+        circle at 72% 75%,
+        #00eaff 0,
+        transparent 2px
+    ),
+
+    radial-gradient(
+        circle at 25% 82%,
+        #b44dff 0,
+        transparent 2px
+    );
+
+    opacity:.5;
+
+    animation:stars 6s ease-in-out infinite alternate;
+}
+
+
+@keyframes stars{
+
+    from{
+        transform:translateY(0);
+        opacity:.35;
+    }
+
+    to{
+        transform:translateY(-18px);
+        opacity:.7;
+    }
+}
+
+
+/* ========================================
+   HEADER
+   ======================================== */
+
+.header{
+
+    height:90px;
+
+    padding:12px 35px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    position:relative;
+
+    z-index:20;
+
+    border-bottom:
+    1px solid rgba(0,220,255,.2);
+
+    background:
+    rgba(2,8,22,.75);
+
+    backdrop-filter:blur(12px);
+}
+
+
+/* ========================================
+   LOGO
+   ======================================== */
+
+.logo{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+}
+
+
+.logo-icon{
+
+    width:60px;
+
+    height:60px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border:1px solid #00eaff;
+
+    background:
+    rgba(0,220,255,.05);
+
+    box-shadow:
+    0 0 12px rgba(0,220,255,.3);
+
+}
+
+
+.logo-icon span{
+
+    font-family:'Orbitron',sans-serif;
+
+    font-size:28px;
+
+    font-weight:800;
+
+    color:#00eaff;
+
+    text-shadow:
+    0 0 8px #00eaff,
+    0 0 18px rgba(180,70,255,.6);
+}
+
+
+.brand-title{
+
+    font-family:'Orbitron',sans-serif;
+
+    font-size:21px;
+
+    font-weight:700;
+
+    letter-spacing:2px;
+}
+
+
+.brand-subtitle{
+
+    margin-top:4px;
+
+    font-size:9px;
+
+    letter-spacing:3px;
+
+    color:#00dfff;
+}
+
+
+/* ========================================
+   HOME BUTTON
+   ======================================== */
+
+.home-btn{
+
+    padding:11px 20px;
+
+    border:1px solid #00dfff;
+
+    border-radius:12px;
+
+    background:
+    rgba(0,30,55,.65);
+
+    color:#ffffff;
+
+    font-family:'Poppins',sans-serif;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+    box-shadow:
+    0 0 12px rgba(0,220,255,.15);
+}
+
+
+.home-btn:hover{
+
+    transform:translateY(-2px);
+
+    border-color:#b44dff;
+
+    color:#00eaff;
+
+    box-shadow:
+    0 0 20px rgba(0,220,255,.4);
+}
+
+
+/* ========================================
+   HOLOGRAM ORBIT
+   ======================================== */
+
+.hologram-area{
+
+    height:190px;
+
+    position:relative;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+}
+
+
+.holo-ring{
+
+    position:absolute;
+
+    width:250px;
+
+    height:80px;
+
+    border:1px solid rgba(0,234,255,.55);
+
+    border-radius:50%;
+
+    transform:rotateX(65deg);
+
+    box-shadow:
+    0 0 12px rgba(0,220,255,.2);
+
+    animation:ringRotate 7s linear infinite;
+}
+
+
+.holo-ring.two{
+
+    width:190px;
+
+    height:60px;
+
+    border-color:
+    rgba(180,70,255,.55);
+
+    animation-duration:10s;
+
+    animation-direction:reverse;
+}
+
+
+@keyframes ringRotate{
+
+    from{
+        transform:
+        rotateX(65deg)
+        rotateZ(0deg);
+    }
+
+    to{
+        transform:
+        rotateX(65deg)
+        rotateZ(360deg);
+    }
+}
+
+
+/* ========================================
+   HV CORE
+   ======================================== */
+
+.hv-core{
+
+    width:90px;
+
+    height:90px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    position:relative;
+
+    z-index:5;
+
+    border:1px solid rgba(0,234,255,.7);
+
+    transform:rotate(45deg);
+
+    background:
+    rgba(0,30,60,.15);
+
+    box-shadow:
+    0 0 18px rgba(0,220,255,.25);
+
+    animation:corePulse 3s ease-in-out infinite;
+}
+
+
+.hv-core span{
+
+    transform:rotate(-45deg);
+
+    font-family:'Orbitron',sans-serif;
+
+    font-size:30px;
+
+    font-weight:800;
+
+    color:#00eaff;
+
+    text-shadow:
+    0 0 7px #00eaff,
+    0 0 18px rgba(180,70,255,.5);
+}
+
+
+@keyframes corePulse{
+
+    50%{
+
+        box-shadow:
+        0 0 30px rgba(0,220,255,.5),
+        0 0 45px rgba(160,60,255,.2);
+    }
+}
+
+
+/* ========================================
+   CHAT TITLE
+   ======================================== */
+
+.chat-heading{
+
+    position:relative;
+
+    z-index:10;
+
+    text-align:center;
+
+    margin-top:-8px;
+
+    padding:0 20px;
+}
+
+
+.chat-heading h1{
+
+    font-family:'Orbitron',sans-serif;
+
+    font-size:32px;
+
+    letter-spacing:3px;
+
+    background:
+
+    linear-gradient(
+        90deg,
+        #00eaff,
+        #ffffff,
+        #b44dff
+    );
+
+    -webkit-background-clip:text;
+
+    -webkit-text-fill-color:transparent;
+}
+
+
+.chat-heading p{
+
+    margin-top:8px;
+
+    color:#b9dff0;
+
+    font-size:14px;
+}
+
+
+/* ========================================
+   CHAT BOX
+   ======================================== */
+
+.chat-wrapper{
+
+    width:700px;
+
+    max-width:92%;
+
+    margin:25px auto 0;
+
+    position:relative;
+
+    z-index:10;
+
+    padding:22px;
+
+    border:1px solid rgba(0,220,255,.25);
+
+    border-radius:22px;
+
+    background:
+    rgba(3,15,32,.82);
+
+    backdrop-filter:blur(15px);
+
+    box-shadow:
+    0 0 30px rgba(0,220,255,.08),
+    inset 0 0 25px rgba(0,220,255,.025);
+}
+
+
+/* ========================================
+   ANSWER AREA
+   ======================================== */
+
+#answer{
+
+    min-height:130px;
+
+    max-height:350px;
+
+    overflow-y:auto;
+
+    padding:18px;
+
+    margin-bottom:15px;
+
+    border-radius:15px;
+
+    border:1px solid rgba(0,220,255,.15);
+
+    background:
+    rgba(0,0,0,.25);
+
+    color:#dffaff;
+
+    line-height:1.7;
+
+    font-size:14px;
+
+}
+
+
+/* ========================================
+   QUESTION INPUT
+   ======================================== */
+
+.input-area{
+
+    display:flex;
+
+    gap:10px;
+
+    align-items:flex-end;
+}
+
+
+#question{
+
+    flex:1;
+
+    min-height:55px;
+
+    max-height:150px;
+
+    resize:vertical;
+
+    padding:15px;
+
+    border:1px solid rgba(0,220,255,.3);
+
+    border-radius:14px;
+
+    outline:none;
+
+    background:
+    rgba(0,25,45,.8);
+
+    color:#ffffff;
+
+    font-family:'Poppins',sans-serif;
+
+    font-size:14px;
+
+    transition:.3s;
+}
+
+
+#question::placeholder{
+
+    color:#7895a8;
+}
+
+
+#question:focus{
+
+    border-color:#00eaff;
+
+    box-shadow:
+    0 0 15px rgba(0,220,255,.2);
+}
+
+
+#sendBtn{
+
+    min-width:100px;
+
+    height:55px;
+
+    border:1px solid #00eaff;
+
+    border-radius:14px;
+
+    background:
+    linear-gradient(
+        135deg,
+        rgba(0,220,255,.15),
+        rgba(120,50,255,.2)
+    );
+
+    color:#ffffff;
+
+    font-family:'Orbitron',sans-serif;
+
+    font-size:14px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+    box-shadow:
+    0 0 15px rgba(0,220,255,.2);
+}
+
+
+#sendBtn:hover{
+
+    transform:translateY(-2px);
+
+    border-color:#b44dff;
+
+    box-shadow:
+    0 0 25px rgba(0,220,255,.5);
+}
+
+
+/* ========================================
+   CONTINUE WITH PART 2
+   ======================================== */
+   
+   
+   /* ========================================
+   TOOL BUTTONS
+   ======================================== */
+
+.tool-buttons{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(2,1fr);
+
+    gap:10px;
+
+    margin-top:15px;
+}
+
+
+.tool-btn{
+
+    min-height:48px;
+
+    padding:10px 12px;
+
+    border:1px solid rgba(0,220,255,.3);
+
+    border-radius:12px;
+
+    background:
+    rgba(0,25,45,.7);
+
+    color:#dffaff;
+
+    font-family:'Poppins',sans-serif;
+
+    font-size:13px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+
+.tool-btn:hover{
+
+    transform:translateY(-2px);
+
+    border-color:#00eaff;
+
+    color:#ffffff;
+
+    background:
+    rgba(0,220,255,.08);
+
+    box-shadow:
+    0 0 16px rgba(0,220,255,.25);
+}
+
+
+/* ========================================
+   IMAGE PREVIEW
+   ======================================== */
+
+#imagePreview{
+
+    margin-top:15px;
+
+    text-align:center;
+}
+
+
+#imagePreview img{
+
+    max-width:100%;
+
+    max-height:220px;
+
+    border-radius:14px;
+
+    border:1px solid #00eaff;
+
+    box-shadow:
+    0 0 20px rgba(0,220,255,.25);
+}
+
+
+/* ========================================
+   CHAT MESSAGE STYLE
+   ======================================== */
+
+.user-message{
+
+    margin:10px 0;
+
+    padding:12px 15px;
+
+    margin-left:auto;
+
+    max-width:85%;
+
+    border-radius:
+    16px 16px 3px 16px;
+
+    background:
+    linear-gradient(
+        135deg,
+        rgba(0,180,220,.18),
+        rgba(80,50,180,.18)
+    );
+
+    border:1px solid rgba(0,220,255,.2);
+
+    color:#ffffff;
+}
+
+
+.ai-message{
+
+    margin:10px 0;
+
+    padding:12px 15px;
+
+    margin-right:auto;
+
+    max-width:85%;
+
+    border-radius:
+    16px 16px 16px 3px;
+
+    background:
+    rgba(255,255,255,.045);
+
+    border:1px solid rgba(180,70,255,.2);
+
+    color:#dffaff;
+}
+
+
+/* ========================================
+   FOOTER
+   ======================================== */
+
+.chat-footer{
+
+    text-align:center;
+
+    margin-top:18px;
+
+    color:#547286;
+
+    font-size:9px;
+
+    letter-spacing:2px;
+}
+
+
+/* ========================================
+   MOBILE
+   ======================================== */
+
+@media(max-width:600px){
+
+    .header{
+
+        height:78px;
+
+        padding:10px 14px;
+    }
+
+
+    .logo-icon{
+
+        width:48px;
+
+        height:48px;
+    }
+
+
+    .logo-icon span{
+
+        font-size:22px;
+    }
+
+
+    .brand-title{
+
+        font-size:15px;
+
+        letter-spacing:1px;
+    }
+
+
+    .brand-subtitle{
+
+        font-size:7px;
+
+        letter-spacing:1.5px;
+    }
+
+
+    .home-btn{
+
+        padding:9px 12px;
+
+        font-size:11px;
+    }
+
+
+    .hologram-area{
+
+        height:160px;
+    }
+
+
+    .holo-ring{
+
+        width:210px;
+
+        height:70px;
+    }
+
+
+    .holo-ring.two{
+
+        width:160px;
+
+        height:52px;
+    }
+
+
+    .hv-core{
+
+        width:72px;
+
+        height:72px;
+    }
+
+
+    .hv-core span{
+
+        font-size:25px;
+    }
+
+
+    .chat-heading h1{
+
+        font-size:24px;
+
+        letter-spacing:2px;
+    }
+
+
+    .chat-heading p{
+
+        font-size:12px;
+    }
+
+
+    .chat-wrapper{
+
+        padding:14px;
+
+        margin-top:20px;
+
+        border-radius:18px;
+    }
+
+
+    .input-area{
+
+        flex-direction:column;
+
+        align-items:stretch;
+    }
+
+
+    #question{
+
+        width:100%;
+
+        min-height:100px;
+    }
+
+
+    #sendBtn{
+
+        width:100%;
+    }
+
+
+    .tool-buttons{
+
+        grid-template-columns:
+        1fr 1fr;
+    }
+
+
+    .tool-btn{
+
+        font-size:11px;
+
+        min-height:45px;
+
+        padding:8px 5px;
+    }
+
+
+    #answer{
+
+        min-height:120px;
+
+        font-size:13px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+<div class="page">
+
+
+<!-- ========================================
+     HEADER
+     ======================================== -->
+
+<header class="header">
+
+    <div class="logo">
+
+        <div class="logo-icon">
+
+            <span>HV</span>
+
+        </div>
+
+        <div>
+
+            <div class="brand-title">
+                HOLOVISION AI
+            </div>
+
+            <div class="brand-subtitle">
+                INTELLIGENT LEARNING SYSTEM
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <button
+        class="home-btn"
+        type="button"
+        onclick="window.location='home.html'">
+
+        ← Home
+
+    </button>
+
+</header>
+
+
+<!-- ========================================
+     HOLOGRAM AREA
+     ======================================== -->
+
+<section class="hologram-area">
+
+    <div class="holo-ring"></div>
+
+    <div class="holo-ring two"></div>
+
+    <div class="hv-core">
+
+        <span>HV</span>
+
+    </div>
+
+</section>
+
+
+<!-- ========================================
+     TITLE
+     ======================================== -->
+
+<section class="chat-heading">
+
+    <h1>
+        HOLOVISION AI
+    </h1>
+
+    <p>
+        Your Intelligent Learning Assistant
+    </p>
+
+</section>
+
+
+<!-- ========================================
+     CHAT
+     ======================================== -->
+
+<div class="chat-wrapper">
+
+
+    <!-- ANSWER -->
+
+    <div id="answer">
+
+        <div class="ai-message">
+
+            👋 Hello! I'm your HoloVision AI
+            learning assistant.
+
+            <br><br>
+
+            Ask me anything about your studies!
+
+        </div>
+
+    </div>
+
+
+    <!-- 3D VISUALISATION AREA -->
+
+    <div id="visual3dArea"></div>
+
+
+</div>
+
+    <!-- INPUT -->
+
+    <div class="input-area">
+
+        <textarea
+            id="question"
+            placeholder="Ask anything about your studies...">
+        </textarea>
+
+
+        <button
+            id="sendBtn"
+            type="button">
+
+            Send ✦
+
+        </button>
+
+    </div>
+
+
+    <!-- ====================================
+         TOOLS
+         ==================================== -->
+
+    <div class="tool-buttons">
+
+
+        <button
+            id="voiceBtn"
+            class="tool-btn"
+            type="button">
+
+            🎤 Speak
+
+        </button>
+
+
+        <button
+            id="speakBtn"
+            class="tool-btn"
+            type="button">
+
+            🔊 Read Answer
+
+        </button>
+
+
+        <button
+            id="studyBtn"
+            class="tool-btn"
+            type="button">
+
+            🎓 Study Mode
+
+        </button>
+        
+        <button
+    id="visual3dBtn"
+    class="tool-btn"
+    type="button">
+
+    🌐 3D Visualisation
+
+</button>
+
+
+        <button
+            id="clearBtn"
+            class="tool-btn"
+            type="button">
+
+            🗑️ Clear Chat
+
+        </button>
+
+
+        <button
+            id="cameraBtn"
+            class="tool-btn"
+            type="button">
+
+            📷 Camera
+
+        </button>
+
+
+        <button
+            id="uploadBtn"
+            class="tool-btn"
+            type="button">
+
+            🖼️ Upload Image
+
+        </button>
+
+    </div>
+
+
+    <!-- ====================================
+         IMAGE INPUT
+         ==================================== -->
+
+    <input
+        type="file"
+        id="imageInput"
+        accept="image/*"
+        capture="environment"
+        style="display:none;">
+
+
+    <div id="imagePreview"></div>
+
+
+    <!-- FOOTER -->
+
+    <div class="chat-footer">
+
+        HOLOVISION AI • INTELLIGENT LEARNING SYSTEM
+
+    </div>
+
+
+</div>
+
+
+</div>
+
+
+<!-- ========================================
+     JAVASCRIPT
+     ======================================== -->
+
+<!-- THREE.JS -->
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+
+<!-- ORBIT CONTROLS -->
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+
+<!-- GLTF / GLB LOADER -->
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+
+<!-- REAL 3D VIEWER -->
+<script src="js/real3d.js"></script>
+
+<!-- AI CHAT -->
+<script type="module" src="js/chat.js"></script>
+
+</body>
+</html>
