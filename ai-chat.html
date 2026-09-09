@@ -2,960 +2,954 @@
 <html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="theme-color" content="#020611">
+
+    <title>HoloVision AI - Chat</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            min-height: 100%;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: #ffffff;
+
+            background:
+                radial-gradient(
+                    circle at 50% 10%,
+                    rgba(0, 220, 255, 0.10),
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 85% 70%,
+                    rgba(150, 60, 255, 0.10),
+                    transparent 35%
+                ),
+                #020611;
+
+            overflow-x: hidden;
+        }
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>HoloVision AI - Chat</title>
+        /* =========================
+           MAIN PAGE
+        ========================= */
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        .page {
+            width: 100%;
+            min-height: 100vh;
+            position: relative;
+            overflow: hidden;
+            padding-bottom: 40px;
+        }
 
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
+        .page::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
 
-<style>
+            background:
+                radial-gradient(
+                    circle at 12% 25%,
+                    #00eaff 0,
+                    transparent 2px
+                ),
+                radial-gradient(
+                    circle at 86% 20%,
+                    #9b5cff 0,
+                    transparent 2px
+                ),
+                radial-gradient(
+                    circle at 72% 75%,
+                    #00eaff 0,
+                    transparent 2px
+                ),
+                radial-gradient(
+                    circle at 25% 82%,
+                    #b44dff 0,
+                    transparent 2px
+                );
 
-/* ========================================
-   HOLOVISION AI CHAT
-   PART 1 - MAIN DESIGN
-   ======================================== */
+            opacity: 0.45;
+        }
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
 
-html,
-body{
-    width:100%;
-    min-height:100%;
-}
+        /* =========================
+           HEADER
+        ========================= */
 
-body{
+        .header {
+            width: 100%;
+            min-height: 82px;
 
-    font-family:'Poppins',sans-serif;
+            padding: 12px 35px;
 
-    color:#ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
 
-    background:
-    radial-gradient(
-        circle at 50% 20%,
-        rgba(0,220,255,.08),
-        transparent 30%
-    ),
-    radial-gradient(
-        circle at 80% 70%,
-        rgba(150,60,255,.08),
-        transparent 35%
-    ),
-    #020611;
+            position: relative;
+            z-index: 20;
 
-    overflow-x:hidden;
-}
+            border-bottom: 1px solid rgba(0, 220, 255, 0.20);
 
+            background: rgba(2, 8, 22, 0.82);
 
-/* ========================================
-   BACKGROUND
-   ======================================== */
+            backdrop-filter: blur(12px);
+        }
 
-.page{
 
-    min-height:100vh;
+        /* =========================
+           LOGO
+        ========================= */
 
-    position:relative;
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+        }
 
-    overflow:hidden;
 
-    padding-bottom:40px;
-}
+        .logo-icon {
+            width: 55px;
+            height: 55px;
 
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
-.page::before{
+            border: 1px solid #00eaff;
 
-    content:"";
+            background: rgba(0, 220, 255, 0.05);
 
-    position:fixed;
+            box-shadow:
+                0 0 12px rgba(0, 220, 255, 0.3);
+        }
 
-    inset:0;
 
-    pointer-events:none;
+        .logo-icon span {
+            font-family: 'Orbitron', sans-serif;
 
-    background:
+            font-size: 25px;
+            font-weight: 800;
 
-    radial-gradient(
-        circle at 12% 25%,
-        #00eaff 0,
-        transparent 2px
-    ),
+            color: #00eaff;
 
-    radial-gradient(
-        circle at 86% 20%,
-        #9b5cff 0,
-        transparent 2px
-    ),
+            text-shadow:
+                0 0 8px #00eaff,
+                0 0 18px rgba(180, 70, 255, 0.6);
+        }
 
-    radial-gradient(
-        circle at 72% 75%,
-        #00eaff 0,
-        transparent 2px
-    ),
 
-    radial-gradient(
-        circle at 25% 82%,
-        #b44dff 0,
-        transparent 2px
-    );
+        .brand-title {
+            font-family: 'Orbitron', sans-serif;
 
-    opacity:.5;
+            font-size: 20px;
+            font-weight: 700;
 
-    animation:stars 6s ease-in-out infinite alternate;
-}
+            letter-spacing: 2px;
+        }
 
 
-@keyframes stars{
+        .brand-subtitle {
+            margin-top: 4px;
 
-    from{
-        transform:translateY(0);
-        opacity:.35;
-    }
+            font-size: 8px;
 
-    to{
-        transform:translateY(-18px);
-        opacity:.7;
-    }
-}
+            letter-spacing: 2.5px;
 
+            color: #00dfff;
+        }
 
-/* ========================================
-   HEADER
-   ======================================== */
 
-.header{
+        /* =========================
+           HOME BUTTON
+        ========================= */
 
-    height:90px;
+        .home-btn {
+            padding: 10px 18px;
 
-    padding:12px 35px;
+            border: 1px solid #00dfff;
+            border-radius: 11px;
 
-    display:flex;
+            background: rgba(0, 30, 55, 0.65);
 
-    align-items:center;
+            color: #ffffff;
 
-    justify-content:space-between;
+            font-family: 'Poppins', sans-serif;
 
-    position:relative;
+            font-weight: 600;
+            font-size: 13px;
 
-    z-index:20;
+            cursor: pointer;
 
-    border-bottom:
-    1px solid rgba(0,220,255,.2);
+            transition: 0.3s;
 
-    background:
-    rgba(2,8,22,.75);
+            box-shadow:
+                0 0 12px rgba(0, 220, 255, 0.15);
+        }
 
-    backdrop-filter:blur(12px);
-}
 
+        .home-btn:hover {
+            transform: translateY(-2px);
 
-/* ========================================
-   LOGO
-   ======================================== */
+            border-color: #b44dff;
 
-.logo{
+            color: #00eaff;
 
-    display:flex;
+            box-shadow:
+                0 0 20px rgba(0, 220, 255, 0.4);
+        }
 
-    align-items:center;
 
-    gap:14px;
-}
+        /* =========================
+           HOLOGRAM
+        ========================= */
 
+        .hologram-area {
+            width: 100%;
+            height: 190px;
 
-.logo-icon{
+            position: relative;
 
-    width:60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-    height:60px;
 
-    display:flex;
+        .holo-ring {
+            position: absolute;
 
-    align-items:center;
+            width: 250px;
+            height: 80px;
 
-    justify-content:center;
+            border: 1px solid rgba(0, 234, 255, 0.55);
 
-    border:1px solid #00eaff;
+            border-radius: 50%;
 
-    background:
-    rgba(0,220,255,.05);
+            transform: rotateX(65deg);
 
-    box-shadow:
-    0 0 12px rgba(0,220,255,.3);
+            box-shadow:
+                0 0 12px rgba(0, 220, 255, 0.2);
 
-}
+            animation: ringRotate 7s linear infinite;
+        }
 
 
-.logo-icon span{
+        .holo-ring.two {
+            width: 190px;
+            height: 60px;
 
-    font-family:'Orbitron',sans-serif;
+            border-color:
+                rgba(180, 70, 255, 0.55);
 
-    font-size:28px;
+            animation-duration: 10s;
 
-    font-weight:800;
+            animation-direction: reverse;
+        }
 
-    color:#00eaff;
 
-    text-shadow:
-    0 0 8px #00eaff,
-    0 0 18px rgba(180,70,255,.6);
-}
+        @keyframes ringRotate {
 
+            from {
+                transform:
+                    rotateX(65deg)
+                    rotateZ(0deg);
+            }
 
-.brand-title{
+            to {
+                transform:
+                    rotateX(65deg)
+                    rotateZ(360deg);
+            }
+        }
 
-    font-family:'Orbitron',sans-serif;
 
-    font-size:21px;
+        /* =========================
+           HV CORE
+        ========================= */
 
-    font-weight:700;
+        .hv-core {
+            width: 88px;
+            height: 88px;
 
-    letter-spacing:2px;
-}
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
+            position: relative;
+            z-index: 5;
 
-.brand-subtitle{
+            border: 1px solid rgba(0, 234, 255, 0.7);
 
-    margin-top:4px;
+            transform: rotate(45deg);
 
-    font-size:9px;
+            background: rgba(0, 30, 60, 0.15);
 
-    letter-spacing:3px;
+            box-shadow:
+                0 0 18px rgba(0, 220, 255, 0.25);
 
-    color:#00dfff;
-}
+            animation: corePulse 3s ease-in-out infinite;
+        }
 
 
-/* ========================================
-   HOME BUTTON
-   ======================================== */
+        .hv-core span {
+            transform: rotate(-45deg);
 
-.home-btn{
+            font-family: 'Orbitron', sans-serif;
 
-    padding:11px 20px;
+            font-size: 29px;
+            font-weight: 800;
 
-    border:1px solid #00dfff;
+            color: #00eaff;
 
-    border-radius:12px;
+            text-shadow:
+                0 0 7px #00eaff,
+                0 0 18px rgba(180, 70, 255, 0.5);
+        }
 
-    background:
-    rgba(0,30,55,.65);
 
-    color:#ffffff;
+        @keyframes corePulse {
 
-    font-family:'Poppins',sans-serif;
+            50% {
+                box-shadow:
+                    0 0 30px rgba(0, 220, 255, 0.5),
+                    0 0 45px rgba(160, 60, 255, 0.2);
+            }
+        }
 
-    font-weight:600;
 
-    cursor:pointer;
+        /* =========================
+           TITLE
+        ========================= */
 
-    transition:.3s;
+        .chat-heading {
+            position: relative;
+            z-index: 10;
 
-    box-shadow:
-    0 0 12px rgba(0,220,255,.15);
-}
+            text-align: center;
 
+            padding: 0 20px;
+        }
 
-.home-btn:hover{
 
-    transform:translateY(-2px);
+        .chat-heading h1 {
+            font-family: 'Orbitron', sans-serif;
 
-    border-color:#b44dff;
+            font-size: clamp(25px, 4vw, 36px);
 
-    color:#00eaff;
+            letter-spacing: 3px;
 
-    box-shadow:
-    0 0 20px rgba(0,220,255,.4);
-}
+            background:
+                linear-gradient(
+                    90deg,
+                    #00eaff,
+                    #ffffff,
+                    #b44dff
+                );
 
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-/* ========================================
-   HOLOGRAM ORBIT
-   ======================================== */
 
-.hologram-area{
+        .chat-heading p {
+            margin-top: 8px;
 
-    height:190px;
+            color: #b9dff0;
 
-    position:relative;
+            font-size: 14px;
+        }
 
-    display:flex;
 
-    align-items:center;
+        /* =========================
+           CHAT CONTAINER
+        ========================= */
 
-    justify-content:center;
-}
+        .chat-wrapper {
+            width: min(900px, 92%);
 
+            margin: 25px auto 0;
 
-.holo-ring{
+            position: relative;
+            z-index: 10;
 
-    position:absolute;
+            padding: 22px;
 
-    width:250px;
+            border: 1px solid rgba(0, 220, 255, 0.25);
 
-    height:80px;
+            border-radius: 22px;
 
-    border:1px solid rgba(0,234,255,.55);
+            background:
+                rgba(3, 15, 32, 0.82);
 
-    border-radius:50%;
+            backdrop-filter: blur(15px);
 
-    transform:rotateX(65deg);
+            box-shadow:
+                0 0 30px rgba(0, 220, 255, 0.08),
+                inset 0 0 25px rgba(0, 220, 255, 0.025);
+        }
 
-    box-shadow:
-    0 0 12px rgba(0,220,255,.2);
 
-    animation:ringRotate 7s linear infinite;
-}
+        /* =========================
+           ANSWER
+        ========================= */
 
+        #answer {
+            width: 100%;
 
-.holo-ring.two{
+            min-height: 150px;
+            max-height: 350px;
 
-    width:190px;
+            overflow-y: auto;
 
-    height:60px;
+            padding: 18px;
 
-    border-color:
-    rgba(180,70,255,.55);
+            margin-bottom: 15px;
 
-    animation-duration:10s;
+            border-radius: 15px;
 
-    animation-direction:reverse;
-}
+            border: 1px solid rgba(0, 220, 255, 0.15);
 
+            background: rgba(0, 0, 0, 0.25);
 
-@keyframes ringRotate{
+            color: #dffaff;
 
-    from{
-        transform:
-        rotateX(65deg)
-        rotateZ(0deg);
-    }
+            line-height: 1.7;
 
-    to{
-        transform:
-        rotateX(65deg)
-        rotateZ(360deg);
-    }
-}
+            font-size: 14px;
+        }
 
 
-/* ========================================
-   HV CORE
-   ======================================== */
+        /* =========================
+           INPUT
+        ========================= */
 
-.hv-core{
+        .input-area {
+            width: 100%;
 
-    width:90px;
+            display: flex;
 
-    height:90px;
+            gap: 10px;
 
-    display:flex;
+            align-items: stretch;
+        }
 
-    align-items:center;
 
-    justify-content:center;
+        #question {
+            flex: 1;
 
-    position:relative;
+            min-height: 55px;
 
-    z-index:5;
+            max-height: 150px;
 
-    border:1px solid rgba(0,234,255,.7);
+            resize: vertical;
 
-    transform:rotate(45deg);
+            padding: 15px;
 
-    background:
-    rgba(0,30,60,.15);
+            border: 1px solid rgba(0, 220, 255, 0.3);
 
-    box-shadow:
-    0 0 18px rgba(0,220,255,.25);
+            border-radius: 14px;
 
-    animation:corePulse 3s ease-in-out infinite;
-}
+            outline: none;
 
+            background: rgba(0, 25, 45, 0.8);
 
-.hv-core span{
+            color: #ffffff;
 
-    transform:rotate(-45deg);
+            font-family: 'Poppins', sans-serif;
 
-    font-family:'Orbitron',sans-serif;
+            font-size: 14px;
+        }
 
-    font-size:30px;
 
-    font-weight:800;
+        #question::placeholder {
+            color: #7895a8;
+        }
 
-    color:#00eaff;
 
-    text-shadow:
-    0 0 7px #00eaff,
-    0 0 18px rgba(180,70,255,.5);
-}
+        #question:focus {
+            border-color: #00eaff;
 
+            box-shadow:
+                0 0 15px rgba(0, 220, 255, 0.2);
+        }
 
-@keyframes corePulse{
 
-    50%{
+        #sendBtn {
+            min-width: 105px;
 
-        box-shadow:
-        0 0 30px rgba(0,220,255,.5),
-        0 0 45px rgba(160,60,255,.2);
-    }
-}
+            height: 55px;
 
+            border: 1px solid #00eaff;
 
-/* ========================================
-   CHAT TITLE
-   ======================================== */
+            border-radius: 14px;
 
-.chat-heading{
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(0, 220, 255, 0.15),
+                    rgba(120, 50, 255, 0.2)
+                );
 
-    position:relative;
+            color: #ffffff;
 
-    z-index:10;
+            font-family: 'Orbitron', sans-serif;
 
-    text-align:center;
+            font-size: 13px;
 
-    margin-top:-8px;
+            font-weight: 600;
 
-    padding:0 20px;
-}
+            cursor: pointer;
 
+            transition: 0.3s;
+        }
 
-.chat-heading h1{
 
-    font-family:'Orbitron',sans-serif;
+        #sendBtn:hover {
+            transform: translateY(-2px);
 
-    font-size:32px;
+            border-color: #b44dff;
 
-    letter-spacing:3px;
+            box-shadow:
+                0 0 25px rgba(0, 220, 255, 0.5);
+        }
 
-    background:
 
-    linear-gradient(
-        90deg,
-        #00eaff,
-        #ffffff,
-        #b44dff
-    );
+        /* =========================
+           TOOLS
+        ========================= */
 
-    -webkit-background-clip:text;
+        .tool-buttons {
+            display: grid;
 
-    -webkit-text-fill-color:transparent;
-}
+            grid-template-columns:
+                repeat(3, 1fr);
 
+            gap: 10px;
 
-.chat-heading p{
+            margin-top: 15px;
+        }
 
-    margin-top:8px;
 
-    color:#b9dff0;
+        .tool-btn {
+            min-height: 48px;
 
-    font-size:14px;
-}
+            padding: 10px;
 
+            border: 1px solid rgba(0, 220, 255, 0.3);
 
-/* ========================================
-   CHAT BOX
-   ======================================== */
+            border-radius: 12px;
 
-.chat-wrapper{
+            background:
+                rgba(0, 25, 45, 0.7);
 
-    width:700px;
+            color: #dffaff;
 
-    max-width:92%;
+            font-family: 'Poppins', sans-serif;
 
-    margin:25px auto 0;
+            font-size: 12px;
 
-    position:relative;
+            font-weight: 600;
 
-    z-index:10;
+            cursor: pointer;
 
-    padding:22px;
+            transition: 0.3s;
+        }
 
-    border:1px solid rgba(0,220,255,.25);
 
-    border-radius:22px;
+        .tool-btn:hover {
+            transform: translateY(-2px);
 
-    background:
-    rgba(3,15,32,.82);
+            border-color: #00eaff;
 
-    backdrop-filter:blur(15px);
+            color: #ffffff;
 
-    box-shadow:
-    0 0 30px rgba(0,220,255,.08),
-    inset 0 0 25px rgba(0,220,255,.025);
-}
+            background:
+                rgba(0, 220, 255, 0.08);
 
+            box-shadow:
+                0 0 16px rgba(0, 220, 255, 0.25);
+        }
 
-/* ========================================
-   ANSWER AREA
-   ======================================== */
 
-#answer{
+        /* =========================
+           MESSAGES
+        ========================= */
 
-    min-height:130px;
+        .user-message {
+            margin: 10px 0;
 
-    max-height:350px;
+            margin-left: auto;
 
-    overflow-y:auto;
+            padding: 12px 15px;
 
-    padding:18px;
+            max-width: 85%;
 
-    margin-bottom:15px;
+            border-radius:
+                16px 16px 3px 16px;
 
-    border-radius:15px;
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(0, 180, 220, 0.18),
+                    rgba(80, 50, 180, 0.18)
+                );
 
-    border:1px solid rgba(0,220,255,.15);
+            border: 1px solid rgba(0, 220, 255, 0.2);
 
-    background:
-    rgba(0,0,0,.25);
+            color: #ffffff;
+        }
 
-    color:#dffaff;
 
-    line-height:1.7;
+        .ai-message {
+            margin: 10px 0;
 
-    font-size:14px;
+            margin-right: auto;
 
-}
+            padding: 12px 15px;
 
+            max-width: 85%;
 
-/* ========================================
-   QUESTION INPUT
-   ======================================== */
+            border-radius:
+                16px 16px 16px 3px;
 
-.input-area{
+            background:
+                rgba(255, 255, 255, 0.045);
 
-    display:flex;
+            border: 1px solid rgba(180, 70, 255, 0.2);
 
-    gap:10px;
+            color: #dffaff;
+        }
 
-    align-items:flex-end;
-}
 
+        /* =========================
+           IMAGE PREVIEW
+        ========================= */
 
-#question{
+        #imagePreview {
+            margin-top: 15px;
 
-    flex:1;
+            text-align: center;
+        }
 
-    min-height:55px;
 
-    max-height:150px;
+        #imagePreview img {
+            max-width: 100%;
 
-    resize:vertical;
+            max-height: 220px;
 
-    padding:15px;
+            border-radius: 14px;
 
-    border:1px solid rgba(0,220,255,.3);
+            border: 1px solid #00eaff;
 
-    border-radius:14px;
+            box-shadow:
+                0 0 20px rgba(0, 220, 255, 0.25);
+        }
 
-    outline:none;
 
-    background:
-    rgba(0,25,45,.8);
+        /* =========================
+           3D AREA
+        ========================= */
 
-    color:#ffffff;
+        #visual3dArea {
+            width: 100%;
+            min-height: 0;
 
-    font-family:'Poppins',sans-serif;
+            margin-top: 15px;
 
-    font-size:14px;
+            border-radius: 16px;
 
-    transition:.3s;
-}
+            overflow: hidden;
+        }
 
 
-#question::placeholder{
+        /* =========================
+           FOOTER
+        ========================= */
 
-    color:#7895a8;
-}
+        .chat-footer {
+            text-align: center;
 
+            margin-top: 20px;
 
-#question:focus{
+            color: #547286;
 
-    border-color:#00eaff;
+            font-size: 9px;
 
-    box-shadow:
-    0 0 15px rgba(0,220,255,.2);
-}
+            letter-spacing: 2px;
+        }
 
 
-#sendBtn{
+        /* =========================
+           TABLET
+        ========================= */
 
-    min-width:100px;
+        @media (max-width: 800px) {
 
-    height:55px;
+            .header {
+                padding: 12px 20px;
+            }
 
-    border:1px solid #00eaff;
+            .chat-wrapper {
+                width: 94%;
+            }
 
-    border-radius:14px;
+            .tool-buttons {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+        }
 
-    background:
-    linear-gradient(
-        135deg,
-        rgba(0,220,255,.15),
-        rgba(120,50,255,.2)
-    );
 
-    color:#ffffff;
+        /* =========================
+           PHONE
+        ========================= */
 
-    font-family:'Orbitron',sans-serif;
+        @media (max-width: 600px) {
 
-    font-size:14px;
+            .header {
+                min-height: 72px;
 
-    font-weight:600;
+                padding: 9px 12px;
+            }
 
-    cursor:pointer;
 
-    transition:.3s;
+            .logo {
+                gap: 8px;
+            }
 
-    box-shadow:
-    0 0 15px rgba(0,220,255,.2);
-}
 
+            .logo-icon {
+                width: 44px;
+                height: 44px;
+            }
 
-#sendBtn:hover{
 
-    transform:translateY(-2px);
+            .logo-icon span {
+                font-size: 20px;
+            }
 
-    border-color:#b44dff;
 
-    box-shadow:
-    0 0 25px rgba(0,220,255,.5);
-}
+            .brand-title {
+                font-size: 13px;
 
+                letter-spacing: 1px;
+            }
 
-/* ========================================
-   CONTINUE WITH PART 2
-   ======================================== */
-   
-   
-   /* ========================================
-   TOOL BUTTONS
-   ======================================== */
 
-.tool-buttons{
+            .brand-subtitle {
+                font-size: 6px;
 
-    display:grid;
+                letter-spacing: 1.3px;
+            }
 
-    grid-template-columns:
-    repeat(2,1fr);
 
-    gap:10px;
+            .home-btn {
+                padding: 8px 11px;
 
-    margin-top:15px;
-}
+                font-size: 10px;
+            }
 
 
-.tool-btn{
+            .hologram-area {
+                height: 155px;
+            }
 
-    min-height:48px;
 
-    padding:10px 12px;
+            .holo-ring {
+                width: 205px;
+                height: 67px;
+            }
 
-    border:1px solid rgba(0,220,255,.3);
 
-    border-radius:12px;
+            .holo-ring.two {
+                width: 155px;
+                height: 50px;
+            }
 
-    background:
-    rgba(0,25,45,.7);
 
-    color:#dffaff;
+            .hv-core {
+                width: 70px;
+                height: 70px;
+            }
 
-    font-family:'Poppins',sans-serif;
 
-    font-size:13px;
+            .hv-core span {
+                font-size: 23px;
+            }
 
-    font-weight:600;
 
-    cursor:pointer;
+            .chat-heading {
+                margin-top: 0;
+            }
 
-    transition:.3s;
-}
 
+            .chat-heading h1 {
+                font-size: 23px;
 
-.tool-btn:hover{
+                letter-spacing: 1.5px;
+            }
 
-    transform:translateY(-2px);
 
-    border-color:#00eaff;
+            .chat-heading p {
+                font-size: 11px;
+            }
 
-    color:#ffffff;
 
-    background:
-    rgba(0,220,255,.08);
+            .chat-wrapper {
+                width: 94%;
 
-    box-shadow:
-    0 0 16px rgba(0,220,255,.25);
-}
+                padding: 14px;
 
+                margin-top: 18px;
 
-/* ========================================
-   IMAGE PREVIEW
-   ======================================== */
+                border-radius: 18px;
+            }
 
-#imagePreview{
 
-    margin-top:15px;
+            #answer {
+                min-height: 125px;
 
-    text-align:center;
-}
+                max-height: 300px;
 
+                padding: 14px;
 
-#imagePreview img{
+                font-size: 12px;
+            }
 
-    max-width:100%;
 
-    max-height:220px;
+            .input-area {
+                flex-direction: column;
 
-    border-radius:14px;
+                gap: 9px;
+            }
 
-    border:1px solid #00eaff;
 
-    box-shadow:
-    0 0 20px rgba(0,220,255,.25);
-}
+            #question {
+                width: 100%;
 
+                min-height: 90px;
 
-/* ========================================
-   CHAT MESSAGE STYLE
-   ======================================== */
+                font-size: 13px;
+            }
 
-.user-message{
 
-    margin:10px 0;
+            #sendBtn {
+                width: 100%;
 
-    padding:12px 15px;
+                height: 50px;
+            }
 
-    margin-left:auto;
 
-    max-width:85%;
+            .tool-buttons {
+                grid-template-columns:
+                    repeat(2, 1fr);
 
-    border-radius:
-    16px 16px 3px 16px;
+                gap: 8px;
+            }
 
-    background:
-    linear-gradient(
-        135deg,
-        rgba(0,180,220,.18),
-        rgba(80,50,180,.18)
-    );
 
-    border:1px solid rgba(0,220,255,.2);
+            .tool-btn {
+                min-height: 44px;
 
-    color:#ffffff;
-}
+                padding: 7px 4px;
 
+                font-size: 10px;
+            }
 
-.ai-message{
 
-    margin:10px 0;
+            .user-message,
+            .ai-message {
+                max-width: 92%;
 
-    padding:12px 15px;
+                font-size: 12px;
+            }
+        }
 
-    margin-right:auto;
 
-    max-width:85%;
+        /* =========================
+           VERY SMALL PHONE
+        ========================= */
 
-    border-radius:
-    16px 16px 16px 3px;
+        @media (max-width: 380px) {
 
-    background:
-    rgba(255,255,255,.045);
+            .brand-title {
+                font-size: 11px;
+            }
 
-    border:1px solid rgba(180,70,255,.2);
 
-    color:#dffaff;
-}
+            .brand-subtitle {
+                font-size: 5px;
+            }
 
 
-/* ========================================
-   FOOTER
-   ======================================== */
+            .home-btn {
+                padding: 7px 9px;
+            }
 
-.chat-footer{
 
-    text-align:center;
+            .hologram-area {
+                height: 140px;
+            }
 
-    margin-top:18px;
 
-    color:#547286;
+            .holo-ring {
+                width: 180px;
+                height: 60px;
+            }
 
-    font-size:9px;
 
-    letter-spacing:2px;
-}
+            .holo-ring.two {
+                width: 135px;
+                height: 45px;
+            }
 
 
-/* ========================================
-   MOBILE
-   ======================================== */
+            .hv-core {
+                width: 62px;
+                height: 62px;
+            }
 
-@media(max-width:600px){
 
-    .header{
+            .hv-core span {
+                font-size: 20px;
+            }
 
-        height:78px;
 
-        padding:10px 14px;
-    }
+            .chat-heading h1 {
+                font-size: 20px;
+            }
 
 
-    .logo-icon{
+            .tool-btn {
+                font-size: 9px;
+            }
+        }
 
-        width:48px;
-
-        height:48px;
-    }
-
-
-    .logo-icon span{
-
-        font-size:22px;
-    }
-
-
-    .brand-title{
-
-        font-size:15px;
-
-        letter-spacing:1px;
-    }
-
-
-    .brand-subtitle{
-
-        font-size:7px;
-
-        letter-spacing:1.5px;
-    }
-
-
-    .home-btn{
-
-        padding:9px 12px;
-
-        font-size:11px;
-    }
-
-
-    .hologram-area{
-
-        height:160px;
-    }
-
-
-    .holo-ring{
-
-        width:210px;
-
-        height:70px;
-    }
-
-
-    .holo-ring.two{
-
-        width:160px;
-
-        height:52px;
-    }
-
-
-    .hv-core{
-
-        width:72px;
-
-        height:72px;
-    }
-
-
-    .hv-core span{
-
-        font-size:25px;
-    }
-
-
-    .chat-heading h1{
-
-        font-size:24px;
-
-        letter-spacing:2px;
-    }
-
-
-    .chat-heading p{
-
-        font-size:12px;
-    }
-
-
-    .chat-wrapper{
-
-        padding:14px;
-
-        margin-top:20px;
-
-        border-radius:18px;
-    }
-
-
-    .input-area{
-
-        flex-direction:column;
-
-        align-items:stretch;
-    }
-
-
-    #question{
-
-        width:100%;
-
-        min-height:100px;
-    }
-
-
-    #sendBtn{
-
-        width:100%;
-    }
-
-
-    .tool-buttons{
-
-        grid-template-columns:
-        1fr 1fr;
-    }
-
-
-    .tool-btn{
-
-        font-size:11px;
-
-        min-height:45px;
-
-        padding:8px 5px;
-    }
-
-
-    #answer{
-
-        min-height:120px;
-
-        font-size:13px;
-    }
-
-}
-
-</style>
-
+    </style>
 </head>
 
 
@@ -964,262 +958,267 @@ body{
 <div class="page">
 
 
-<!-- ========================================
-     HEADER
-     ======================================== -->
+    <!-- =========================
+         HEADER
+    ========================= -->
 
-<header class="header">
+    <header class="header">
 
-    <div class="logo">
+        <div class="logo">
 
-        <div class="logo-icon">
+            <div class="logo-icon">
+                <span>HV</span>
+            </div>
 
+            <div>
+
+                <div class="brand-title">
+                    HOLOVISION AI
+                </div>
+
+                <div class="brand-subtitle">
+                    INTELLIGENT LEARNING SYSTEM
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <button
+            class="home-btn"
+            type="button"
+            onclick="window.location.href='index.html'">
+
+            ← Home
+
+        </button>
+
+    </header>
+
+
+    <!-- =========================
+         HOLOGRAM
+    ========================= -->
+
+    <section class="hologram-area">
+
+        <div class="holo-ring"></div>
+
+        <div class="holo-ring two"></div>
+
+        <div class="hv-core">
             <span>HV</span>
-
         </div>
 
-        <div>
+    </section>
 
-            <div class="brand-title">
-                HOLOVISION AI
+
+    <!-- =========================
+         TITLE
+    ========================= -->
+
+    <section class="chat-heading">
+
+        <h1>
+            HOLOVISION AI
+        </h1>
+
+        <p>
+            Your Intelligent Learning Assistant
+        </p>
+
+    </section>
+
+
+    <!-- =========================
+         CHAT
+    ========================= -->
+
+    <div class="chat-wrapper">
+
+
+        <!-- ANSWER -->
+
+        <div id="answer">
+
+            <div class="ai-message">
+
+                👋 Hello! I'm your HoloVision AI
+                learning assistant.
+
+                <br><br>
+
+                Ask me anything about your studies!
+
             </div>
 
-            <div class="brand-subtitle">
-                INTELLIGENT LEARNING SYSTEM
-            </div>
+        </div>
+
+        <!-- INPUT -->
+
+        <div class="input-area">
+
+            <textarea
+                id="question"
+                placeholder="Ask anything about your studies..."></textarea>
+
+            <button
+                id="sendBtn"
+                type="button">
+
+                Send ✦
+
+            </button>
+
+        </div>
+
+
+        <!-- =========================
+             TOOL BUTTONS
+        ========================= -->
+
+        <div class="tool-buttons">
+
+            <button
+                id="voiceBtn"
+                class="tool-btn"
+                type="button">
+
+                🎤 Speak
+
+            </button>
+
+
+            <button
+                id="speakBtn"
+                class="tool-btn"
+                type="button">
+
+                🔊 Read Answer
+
+            </button>
+
+
+            <button
+                id="studyBtn"
+                class="tool-btn"
+                type="button">
+
+                🎓 Study Mode
+
+            </button>
+
+
+            <button
+                id="visual3dBtn"
+                class="tool-btn"
+                type="button">
+
+                🌐 3D Visualisation
+
+            </button>
+
+
+            <button
+                id="clearBtn"
+                class="tool-btn"
+                type="button">
+
+                🗑️ Clear Chat
+
+            </button>
+
+
+            <button
+                id="cameraBtn"
+                class="tool-btn"
+                type="button">
+
+                📷 Camera
+
+            </button>
+
+
+            <button
+                id="uploadBtn"
+                class="tool-btn"
+                type="button">
+
+                🖼️ Upload Image
+
+            </button>
+
+        </div>
+
+
+        <!-- =========================
+             IMAGE INPUT
+        ========================= -->
+
+        <input
+            type="file"
+            id="imageInput"
+            accept="image/*"
+            capture="environment"
+            style="display:none;">
+
+
+        <div id="imagePreview"></div>
+
+
+        <!-- =========================
+             3D VISUALISATION
+        ========================= -->
+
+        <div id="visual3dArea"></div>
+
+
+        <!-- =========================
+             FOOTER
+        ========================= -->
+
+        <div class="chat-footer">
+
+            HOLOVISION AI • INTELLIGENT LEARNING SYSTEM
 
         </div>
 
     </div>
 
 
-    <button
-        class="home-btn"
-        type="button"
-        onclick="window.location='home.html'">
-
-        ← Home
-
-    </button>
-
-</header>
-
-
-<!-- ========================================
-     HOLOGRAM AREA
-     ======================================== -->
-
-<section class="hologram-area">
-
-    <div class="holo-ring"></div>
-
-    <div class="holo-ring two"></div>
-
-    <div class="hv-core">
-
-        <span>HV</span>
-
-    </div>
-
-</section>
-
-
-<!-- ========================================
-     TITLE
-     ======================================== -->
-
-<section class="chat-heading">
-
-    <h1>
-        HOLOVISION AI
-    </h1>
-
-    <p>
-        Your Intelligent Learning Assistant
-    </p>
-
-</section>
-
-
-<!-- ========================================
-     CHAT
-     ======================================== -->
-
-<div class="chat-wrapper">
-
-
-    <!-- ANSWER -->
-
-    <div id="answer">
-
-        <div class="ai-message">
-
-            👋 Hello! I'm your HoloVision AI
-            learning assistant.
-
-            <br><br>
-
-            Ask me anything about your studies!
-
-        </div>
-
-    </div>
-
-
-    <!-- 3D VISUALISATION AREA -->
-
-    <div id="visual3dArea"></div>
-
-
-</div>
-
-    <!-- INPUT -->
-
-    <div class="input-area">
-
-        <textarea
-            id="question"
-            placeholder="Ask anything about your studies...">
-        </textarea>
-
-
-        <button
-            id="sendBtn"
-            type="button">
-
-            Send ✦
-
-        </button>
-
-    </div>
-
-
-    <!-- ====================================
-         TOOLS
-         ==================================== -->
-
-    <div class="tool-buttons">
-
-
-        <button
-            id="voiceBtn"
-            class="tool-btn"
-            type="button">
-
-            🎤 Speak
-
-        </button>
-
-
-        <button
-            id="speakBtn"
-            class="tool-btn"
-            type="button">
-
-            🔊 Read Answer
-
-        </button>
-
-
-        <button
-            id="studyBtn"
-            class="tool-btn"
-            type="button">
-
-            🎓 Study Mode
-
-        </button>
-        
-        <button
-    id="visual3dBtn"
-    class="tool-btn"
-    type="button">
-
-    🌐 3D Visualisation
-
-</button>
-
-
-        <button
-            id="clearBtn"
-            class="tool-btn"
-            type="button">
-
-            🗑️ Clear Chat
-
-        </button>
-
-
-        <button
-            id="cameraBtn"
-            class="tool-btn"
-            type="button">
-
-            📷 Camera
-
-        </button>
-
-
-        <button
-            id="uploadBtn"
-            class="tool-btn"
-            type="button">
-
-            🖼️ Upload Image
-
-        </button>
-
-    </div>
-
-
-    <!-- ====================================
-         IMAGE INPUT
-         ==================================== -->
-
-    <input
-        type="file"
-        id="imageInput"
-        accept="image/*"
-        capture="environment"
-        style="display:none;">
-
-
-    <div id="imagePreview"></div>
-
-
-    <!-- FOOTER -->
-
-    <div class="chat-footer">
-
-        HOLOVISION AI • INTELLIGENT LEARNING SYSTEM
-
-    </div>
-
-
 </div>
 
 
-</div>
-
-
-<!-- ========================================
+<!-- =========================
      JAVASCRIPT
-     ======================================== -->
+========================= -->
 
 <!-- THREE.JS -->
+
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
 
+
 <!-- ORBIT CONTROLS -->
+
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
 
-<!-- GLTF / GLB LOADER -->
+
+<!-- GLTF LOADER -->
+
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
 
-<!-- REAL 3D VIEWER -->
-<script src="js/real3d.js"></script>
+
+<!-- REAL 3D -->
+
+<script src="real3d.js"></script>
+
 
 <!-- AI CHAT -->
-<script type="module" src="js/chat.js"></script>
+
+<script type="module" src="chat.js"></script>
+
 
 </body>
+
 </html>
